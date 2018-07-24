@@ -13,17 +13,12 @@
  */
 package cn.bran.japid.classmeta;
 
-import japa.parser.ast.body.Parameter;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import cn.bran.japid.compiler.JavaSyntaxTool;
-import cn.bran.japid.compiler.NamedArgRuntime;
-import cn.bran.japid.compiler.Tag;
 import cn.bran.japid.compiler.Tag.TagSet;
 
 /**
@@ -64,8 +59,8 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 
 	//
 	public void addSetTag(String setMethodName, String methodBody, TagSet tag) {
-		setMethods.put(setMethodName, methodBody);
-		setTags.put(setMethodName, tag);
+		this.setMethods.put(setMethodName, methodBody);
+		this.setTags.put(setMethodName, tag);
 	}
 
 	// for the doBody in the tag template
@@ -89,7 +84,7 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 	protected void getterSetter() {
 		// `set title = "something"
 		pln();
-		for (Entry<String, String> en : setMethods.entrySet()) {
+		for (Entry<String, String> en : this.setMethods.entrySet()) {
 			String meth = en.getKey();
 			String setBody = en.getValue();
 			pln("\t@Override protected void " + meth + "() {");
@@ -106,6 +101,7 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 	/**
 	 * the main part of the render logic
 	 */
+	@Override
 	protected void layoutMethod() {
 		// doLayout body
 		pln(TAB + "@Override protected void doLayout() {");
@@ -117,8 +113,9 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 	 * the entry point of the template: render(...). Concrete views have this
 	 * method while the layouts do not.
 	 */
+	@Override
 	protected void renderMethod() {
-		String resultType = useWithPlay ? RENDER_RESULT : "String";
+		String resultType = this.useWithPlay ? RENDER_RESULT : "String";
 
 		String paramNameArray = "";
 		String paramTypeArray = "";
@@ -142,17 +139,17 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 		String nameParamCode = String.format(NAMED_PARAM_CODE, paramNameArray, paramTypeArray, paramDefaultsArray, currentClassFQN);
 		pln(nameParamCode);
 
-		if (doBodyArgsString != null)
+		if (this.doBodyArgsString != null)
 			pln("	{ setHasDoBody(); }");
 
-		if (renderArgs != null) {
+		if (this.renderArgs != null) {
 
 			for (Parameter p : params) {
 				addField(p);
 			}
 
 			// set the render(xxx)
-			if (doBodyArgsString != null) {
+			if (this.doBodyArgsString != null) {
 				pln(String.format(NAMED_PARAM_WITH_BODY, getLineMarker()));
 				// the template can be called with a callback body
 				// the field
@@ -177,7 +174,7 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 			}
 			restOfRenderBody(resultType);
 		} else {
-			if (doBodyArgsString != null) {
+			if (this.doBodyArgsString != null) {
 				pln(String.format(NAMED_PARAM_WITH_BODY, getLineMarker()));
 				// the field
 				pln(TAB + "DoBody body;");
@@ -200,7 +197,7 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 		if (args.endsWith(COMMA)) {
 			args = args.substring(0, args.lastIndexOf(COMMA));
 		}
-		String applyMethod = isAbstract? 
+		String applyMethod = this.isAbstract? 
 				String.format(APPLY_METHOD_ABSTRACT, resultType, renderArgsWithoutAnnos, this.className, args) : 
 					String.format(APPLY_METHOD, resultType, renderArgsWithoutAnnos, this.className, args);
 		pln("\n" + applyMethod);
@@ -219,13 +216,13 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 	
 
 	private void restOfRenderBody(String resultType) {
-		if (stopWatch)
+		if (this.stopWatch)
 			pln("\t\tsetStopwatchOn();");
 
 //		pln("\t\tstartRendering(); ");
-		pln("\t\ttry {super.layout(" + superClassRenderArgs +  ");} catch (RuntimeException __e) { super.handleException(__e);} " + getLineMarker());
+		pln("\t\ttry {super.layout(" + this.superClassRenderArgs +  ");} catch (RuntimeException __e) { super.handleException(__e);} " + getLineMarker());
 
-		if (useWithPlay) {
+		if (this.useWithPlay) {
 			pln("\t\treturn getRenderResult();");
 		} else {
 			pln("\t\treturn getRenderResult().toString();");
@@ -236,14 +233,14 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 	private void doBodyInterface() {
 		// let do the doDody callback interface
 		// doBody interface:
-		if (doBodyArgsString != null) {
-			List<String> args = JavaSyntaxTool.parseArgs(doBodyArgsString);
+		if (this.doBodyArgsString != null) {
+			List<String> args = JavaSyntaxTool.parseArgs(this.doBodyArgsString);
 
 			String genericTypeList = "";
 			String renderArgList = "";
 			int i = 0;
 			for (String arg : args) {
-				char c = doBodyGenericTypeParams[i++];
+				char c = this.doBodyGenericTypeParams[i++];
 				genericTypeList += "," + c;
 				renderArgList += "," + c + " " + Character.toLowerCase(c);
 			}

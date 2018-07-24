@@ -27,15 +27,15 @@ public class JapidCompilationException extends RuntimeException {
 	}
 	
 	public String getTemplateName(){
-		return template.name;
+		return this.template.name;
 	}
 	
 	public int getLineNumber(){
-		return startLine;
+		return this.startLine;
 	}
 
 	public String getTemplateSrc() {
-		return template.source;
+		return this.template.source;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class JapidCompilationException extends RuntimeException {
 	 * @return
 	 */
 	public String getLocation() {
-		return template.name + ": line " + startLine;
+		return this.template.name + ": line " + this.startLine;
 	}
 
 }

@@ -16,11 +16,11 @@ public  class  MyTuple2 <A, B>implements Serializable{
 
     public A _1() {
 
-        return a;
+        return this.a;
 
     }
 
     public B _2() {
-        return b;
+        return this.b;
     }
 }

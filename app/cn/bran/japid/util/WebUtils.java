@@ -15,14 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import cn.bran.japid.template.AuthenticityCheck;
-
-import play.api.libs.Crypto;
-import play.i18n.Lang;
-import play.i18n.Messages;
-import play.mvc.Http.Context;
 
 public class WebUtils {
     public static String fastformat(Date date, String pattern) {

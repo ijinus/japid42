@@ -1,6 +1,7 @@
 package cn.bran.play;
 
 import java.io.IOException;
+import java.net.PasswordAuthentication;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,23 +14,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import javax.mail.Authenticator;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
-
-import play.Logger;
-import play.Play;
 import cn.bran.play.exceptions.MailException;
 
 /**
@@ -53,23 +39,28 @@ public class Mail {
 					Mock.send(email);
 					return new Future<Boolean>() {
 
+						@Override
 						public boolean cancel(boolean mayInterruptIfRunning) {
 							return false;
 						}
 
+						@Override
 						public boolean isCancelled() {
 							return false;
 						}
 
+						@Override
 						public boolean isDone() {
 							return true;
 						}
 
+						@Override
 						public Boolean get() throws InterruptedException,
 								ExecutionException {
 							return true;
 						}
 
+						@Override
 						public Boolean get(long timeout, TimeUnit unit)
 								throws InterruptedException,
 								ExecutionException, TimeoutException {
@@ -235,6 +226,7 @@ public class Mail {
 		if (asynchronousSend) {
 			return executor.submit(new Callable<Boolean>() {
 
+				@Override
 				public Boolean call() {
 					try {
 						msg.setSentDate(new Date());
@@ -261,23 +253,28 @@ public class Mail {
 			}
 			return new Future<Boolean>() {
 
+				@Override
 				public boolean cancel(boolean mayInterruptIfRunning) {
 					return false;
 				}
 
+				@Override
 				public boolean isCancelled() {
 					return false;
 				}
 
+				@Override
 				public boolean isDone() {
 					return true;
 				}
 
+				@Override
 				public Boolean get() throws InterruptedException,
 						ExecutionException {
 					return result.length() == 0;
 				}
 
+				@Override
 				public Boolean get(long timeout, TimeUnit unit)
 						throws InterruptedException, ExecutionException,
 						TimeoutException {
@@ -301,7 +298,7 @@ public class Mail {
 
 		@Override
 		protected PasswordAuthentication getPasswordAuthentication() {
-			return new PasswordAuthentication(user, password);
+			return new PasswordAuthentication(this.user, this.password);
 		}
 	}
 

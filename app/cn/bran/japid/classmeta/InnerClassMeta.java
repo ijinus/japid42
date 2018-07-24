@@ -14,8 +14,6 @@
 
 package cn.bran.japid.classmeta;
 
-import japa.parser.ast.body.Parameter;
-
 import java.util.List;
 
 import cn.bran.japid.compiler.JavaSyntaxTool;
@@ -101,7 +99,7 @@ public class InnerClassMeta {
 	}
 	
 	public String getVarRoot() {
-		return tagName.replace('.', '_').replace('/', '_');
+		return this.tagName.replace('.', '_').replace('/', '_');
 	}
 
 	/**
@@ -128,19 +126,19 @@ public class InnerClassMeta {
 		if (generics.startsWith(","))
 			generics = "<" + generics.substring(1).trim() + ">";
 		
-		if (Each.class.getSimpleName().equalsIgnoreCase(tagName)) {
+		if (Each.class.getSimpleName().equalsIgnoreCase(this.tagName)) {
 			// append extra argument to the render method
-			tagName = Each.class.getSimpleName();
-			renderParams += EXTRA_LOOP_ATTRS;
+			this.tagName = Each.class.getSimpleName();
+			this.renderParams += EXTRA_LOOP_ATTRS;
 		}
 		
-		String paramList = renderParams;
+		String paramList = this.renderParams;
 		String renderArgsWithFinal = JavaSyntaxTool.addFinalToAllParams(paramList);
 		
 		StringBuilder sb = new StringBuilder();
-		line(sb, "new " + tagName + ".DoBody" +  generics + "(){ " + lineMarker);
+		line(sb, "new " + this.tagName + ".DoBody" +  generics + "(){ " + lineMarker);
 		line(sb, "public void render(" + renderArgsWithFinal  + ") { " + lineMarker);
-		line(sb, renderBody);
+		line(sb, this.renderBody);
 		line(sb, "}");
 		String bufferString = "\r\n" + 
 				"StringBuilder oriBuffer;\r\n" + 

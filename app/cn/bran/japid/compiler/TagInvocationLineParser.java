@@ -1,7 +1,5 @@
 package cn.bran.japid.compiler;
 
-import japa.parser.ast.body.Parameter;
-
 import java.util.List;
 
 import cn.bran.japid.util.StringUtils;

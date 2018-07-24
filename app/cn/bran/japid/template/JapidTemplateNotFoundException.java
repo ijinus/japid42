@@ -20,7 +20,7 @@ public class JapidTemplateNotFoundException extends RuntimeException {
 	 * @return the templateName
 	 */
 	public String getTemplateName() {
-		return templateName;
+		return this.templateName;
 	}
 	/**
 	 * @param templateName the templateName to set
@@ -32,7 +32,7 @@ public class JapidTemplateNotFoundException extends RuntimeException {
 	 * @return the searchingPath
 	 */
 	public String getSearchingPath() {
-		return searchingPath;
+		return this.searchingPath;
 	}
 	/**
 	 * @param searchingPath the searchingPath to set

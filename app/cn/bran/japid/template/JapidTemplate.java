@@ -46,15 +46,15 @@ public class JapidTemplate {
     	this.source = source;
     	int lastDot = fqName.lastIndexOf('.');
     	if (lastDot >= 0) {
-			packageName = fqName.substring(0, lastDot);
-			className = fqName.substring(lastDot + 1);
+			this.packageName = fqName.substring(0, lastDot);
+			this.className = fqName.substring(lastDot + 1);
     	}
     	else {
-    		packageName = "";
-    		className = fqName;
+    		this.packageName = "";
+    		this.className = fqName;
     	}
     	if (mimeType != null) {
-    		contentTypeHeader = mimeType.header;
+    		this.contentTypeHeader = mimeType.header;
     	}
     }
 
@@ -62,8 +62,8 @@ public class JapidTemplate {
 	 * @author Bing Ran (bing.ran@hotmail.com)
 	 */
 	private void parseFullyQualifiedName() {
-		String tempName = name.replace("-", "_");// .replace('.', '_');
-		contentTypeHeader = MimeTypeEnum.getHeader(tempName.substring(tempName.lastIndexOf('.')));
+		String tempName = this.name.replace("-", "_");// .replace('.', '_');
+		this.contentTypeHeader = MimeTypeEnum.getHeader(tempName.substring(tempName.lastIndexOf('.')));
 		tempName = DirUtil.mapSrcToJava(tempName);
 		tempName = tempName.substring(0, tempName.lastIndexOf(".java"));
 		tempName = tempName.replace('\\', '/');
@@ -77,10 +77,10 @@ public class JapidTemplate {
 			path = path.replace('\\', '.');
 			if (path.startsWith("."))
 				path = path.substring(1);
-			packageName = path;
-			className = tempName.substring(lastSep + 1);
+			this.packageName = path;
+			this.className = tempName.substring(lastSep + 1);
 		} else {
-			className = tempName;
+			this.className = tempName;
 		}
 		
 	}

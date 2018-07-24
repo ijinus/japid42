@@ -3,9 +3,6 @@
  */
 package cn.bran.play.exceptions;
 
-import org.apache.commons.mail.EmailException;
-
-
 /**
  * @author bran
  *

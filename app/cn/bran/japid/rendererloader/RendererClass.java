@@ -32,7 +32,7 @@ public class RendererClass implements Serializable{
 //		this.cl = cl;
 //	}
 	public Class<? extends JapidTemplateBaseWithoutPlay> getClz() {
-		return clz;
+		return this.clz;
 	}
 	public void setClz(Class<? extends JapidTemplateBaseWithoutPlay> clz) {
 		this.clz = clz;
@@ -47,13 +47,13 @@ public class RendererClass implements Serializable{
 			}
 	}
 	public String getClassName() {
-		return className;
+		return this.className;
 	}
 	public void setClassName(String className) {
 		this.className = className;
 	}
 	public String getJavaSourceCode() {
-		return javaSourceCode;
+		return this.javaSourceCode;
 	}
 	public void setJavaSourceCode(String sourceCode) {
 		this.javaSourceCode = sourceCode;
@@ -63,7 +63,7 @@ public class RendererClass implements Serializable{
 		this.lastUpdated = lastUpdates;
 	}
 	public byte[] getBytecode() {
-		return bytecode;
+		return this.bytecode;
 	}
 	public void setBytecode(byte[] bytecode) {
 		this.bytecode = bytecode;
@@ -88,13 +88,13 @@ public class RendererClass implements Serializable{
 	 * @return the srcFile
 	 */
 	private File getScriptFile() {
-		return scriptFile;
+		return this.scriptFile;
 	}
 	/**
 	 * @return the javaSourceCode
 	 */
 	public String getJapidSourceCode() {
-		return japidSourceCode;
+		return this.japidSourceCode;
 	}
 	/**
 	 * @param javaSourceCode the javaSourceCode to set
@@ -106,7 +106,7 @@ public class RendererClass implements Serializable{
 	 * @return the lastUpdated
 	 */
 	public long getLastUpdated() {
-		return lastUpdated;
+		return this.lastUpdated;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class RendererClass implements Serializable{
 	 * @return the constructor
 	 */
 	public Constructor<? extends JapidTemplateBaseWithoutPlay> getConstructor() {
-		return constructor;
+		return this.constructor;
 	}
 	/**
 	 * @author Bing Ran (bing.ran@hotmail.com)
@@ -150,7 +150,7 @@ public class RendererClass implements Serializable{
 	 * @return the lastCompiled
 	 */
 	public long getLastCompiled() {
-		return lastCompiled;
+		return this.lastCompiled;
 	}
 	/**
 	 * @author Bing Ran (bing.ran@hotmail.com)
@@ -163,7 +163,7 @@ public class RendererClass implements Serializable{
 	 * @return the lastDefined
 	 */
 	public long getLastDefined() {
-		return lastDefined;
+		return this.lastDefined;
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public class RendererClass implements Serializable{
 	 * @return the scripTimestamp
 	 */
 	public long getScriptTimestamp() {
-		return scriptTimestamp;
+		return this.scriptTimestamp;
 	}
 	/**
 	 * @param scripTimestamp the scripTimestamp to set
@@ -192,7 +192,7 @@ public class RendererClass implements Serializable{
 			return scriptFile.getPath();
 		}
 		else {
-			return className;
+			return this.className;
 		}
 	}
 	/**
@@ -216,7 +216,7 @@ public class RendererClass implements Serializable{
 	 * @return
 	 */
 	public boolean fromJar() {
-		if (this.contributor != null && contributor.startsWith("jar:"))
+		if (this.contributor != null && this.contributor.startsWith("jar:"))
 			return true;
 		else return false;
 	}

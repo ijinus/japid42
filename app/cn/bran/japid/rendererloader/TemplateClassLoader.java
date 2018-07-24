@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.template.JapidTemplateBaseWithoutPlay;
-import cn.bran.japid.util.JapidFlags;
 
 /**
  * The template class loader that detects changes and recompile on the fly.
@@ -39,7 +38,7 @@ public class TemplateClassLoader extends ClassLoader {
 	@Override
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
 		if (!name.startsWith(JapidRenderer.JAPIDVIEWS)) {
-			Class<?> cl = parentClassLoader.loadClass(name);
+			Class<?> cl = this.parentClassLoader.loadClass(name);
 			if (cl != null) {
 				return cl;
 			}
@@ -48,7 +47,7 @@ public class TemplateClassLoader extends ClassLoader {
 		} else {
 			String oid = "[TemplateClassLoader@" + Integer.toHexString(hashCode()) + "]";
 
-			Class<?> cla = localClasses.get(name);
+			Class<?> cla = this.localClasses.get(name);
 			if (cla != null) {
 				return cla;
 			}
@@ -74,7 +73,7 @@ public class TemplateClassLoader extends ClassLoader {
 			Class<? extends JapidTemplateBaseWithoutPlay> cl = (Class<? extends JapidTemplateBaseWithoutPlay>) defineClass(
 					name, bytecode, 0, bytecode.length);
 			rc.setClz(cl);
-			localClasses.put(name, cl);
+			this.localClasses.put(name, cl);
 			rc.setLastDefined(System.currentTimeMillis());
 			return cl;
 		}

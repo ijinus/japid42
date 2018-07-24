@@ -7,6 +7,7 @@ package cn.bran.japid.template;
  * @author Bing Ran<bing_ran@hotmail.com>
  * @deprecated not used. 
  */
+@Deprecated
 public interface UseJapid {
 
 }

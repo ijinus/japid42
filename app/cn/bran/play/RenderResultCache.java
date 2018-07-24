@@ -1,8 +1,7 @@
 package cn.bran.play;
 
-import play.cache.Cache;
-import play.libs.Time;
-import play.mvc.Result;
+import java.sql.Time;
+
 import cn.bran.japid.template.RenderResult;
 
 /**

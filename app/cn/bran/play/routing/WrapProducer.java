@@ -3,8 +3,6 @@
  */
 package cn.bran.play.routing;
 
-import play.mvc.SimpleResult;
-
 /**
  * @author bran
  * 
@@ -27,6 +25,6 @@ public class WrapProducer extends SimpleResult {
 	 */
 	@Override
 	public play.api.mvc.SimpleResult getWrappedSimpleResult() {
-		return r.getWrappedSimpleResult().as(produces);
+		return this.r.getWrappedSimpleResult().as(this.produces);
 	}
 }

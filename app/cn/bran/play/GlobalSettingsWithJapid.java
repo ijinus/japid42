@@ -9,27 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import play.Application;
-import play.GlobalSettings;
-import play.Play;
-import play.api.mvc.Handler;
-import play.cache.Cache;
-import play.cache.Cached;
-import play.core.Router.Routes;
-import play.mvc.Action;
-import play.mvc.Results;
-import play.mvc.Http.Context;
-import play.mvc.Http.Request;
-import play.mvc.Http.RequestHeader;
-import play.mvc.SimpleResult;
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.util.JapidFlags;
 import cn.bran.japid.util.StringUtils;
 import cn.bran.play.routing.JaxrsRouter;
-import play.libs.F.Promise;
-import scala.Option;
-import scala.Tuple3;
-import scala.collection.Seq;
 
 /**
  * @author bran
@@ -124,7 +107,7 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 	public Action<?> onRequest(Request request, final Method actionMethod) {
 		final String actionName = actionMethod.getDeclaringClass().getName() + "." + actionMethod.getName();
 		final Map<String, String> threadData = JapidController.threadData.get();
-		if (!cacheResponse) {
+		if (!this.cacheResponse) {
 			return new Action.Simple() {
 				public Promise<SimpleResult> call(Context ctx) throws Throwable {
 					// pass the FQN to the japid controller to determine the
@@ -200,7 +183,7 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 
 	@Override
 	public Handler onRouteRequest(RequestHeader request) {
-		if (useJaxrs) {
+		if (this.useJaxrs) {
 //			if (_app.isDev())
 //				JapidFlags.debug("route with Japid router");
 
@@ -351,7 +334,7 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 	 * @return the useJaxrs
 	 */
 	public boolean isUseJaxrs() {
-		return useJaxrs;
+		return this.useJaxrs;
 	}
 
 	/**

@@ -22,10 +22,10 @@ public class CachedItemStatus implements Serializable{
 		long unsafeZone = (long) (ttl * (1 - RenderResultCache.SAFE_TIME_ZONE));
 		if (unsafeZone < MIN_ALERT_ADVANCE) {
 			// make a minimum 1s alert advance
-			safeBefore = timein + ttl - MIN_ALERT_ADVANCE;
+			this.safeBefore = timein + ttl - MIN_ALERT_ADVANCE;
 		}
 		else {
-			safeBefore = timein + ttl - unsafeZone;
+			this.safeBefore = timein + ttl - unsafeZone;
 		}
 			
 	}
@@ -35,15 +35,15 @@ public class CachedItemStatus implements Serializable{
 	}
 
 	boolean expireSoon() {
-		return this.expireSoon ? true : (this.expireSoon = System.currentTimeMillis() > safeBefore);
+		return this.expireSoon ? true : (this.expireSoon = System.currentTimeMillis() > this.safeBefore);
 	}
 
 	public boolean isRefreshing() {
-		return isRefreshing.get();
+		return this.isRefreshing.get();
 	}
 
 	public void setIsRefreshing() {
-		isRefreshing.set(true);
+		this.isRefreshing.set(true);
 	}
 
 	/**
@@ -54,12 +54,12 @@ public class CachedItemStatus implements Serializable{
 	 */
 	public boolean shouldRefresh() {
 		if (expireSoon())
-			return isRefreshing.compareAndSet(false, true);
+			return this.isRefreshing.compareAndSet(false, true);
 		else
 			return false;
 	}
 
 	public boolean isExpired() {
-		return System.currentTimeMillis() > timein + ttl;
+		return System.currentTimeMillis() > this.timein + this.ttl;
 	}
 }

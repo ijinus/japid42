@@ -7,9 +7,6 @@ import java.io.ObjectOutput;
 import java.util.HashMap;
 import java.util.Map;
 
-import play.mvc.Content;
-import play.mvc.Results;
-import scala.collection.Seq;
 import cn.bran.japid.template.RenderResult;
 
 /**
@@ -60,7 +57,7 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 		super(play.core.j.JavaResults.Status(200), r.getContent().toString(), play.api.mvc.Codec.javaSupported("utf-8") );
 		this.renderResult = r;
 		this.setHeaders(r.getHeaders());
-    	Seq<scala.Tuple2<String, String>> seq = scala.collection.JavaConversions.mapAsScalaMap(renderResult.getHeaders()).toSeq();
+    	Seq<scala.Tuple2<String, String>> seq = scala.collection.JavaConversions.mapAsScalaMap(this.renderResult.getHeaders()).toSeq();
 		super.getWrappedSimpleResult().withHeaders(seq);
 	}
 
@@ -83,19 +80,19 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	 */
 	public String extractContent() {
 		String content = "";
-		StringBuilder sb = renderResult.getContent();
+		StringBuilder sb = this.renderResult.getContent();
 		if (sb != null)
 			content = sb.toString();
 		return content;
 	}
 
 	public RenderResult getRenderResult() {
-		return renderResult;
+		return this.renderResult;
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
-		out.writeObject(renderResult);
+		out.writeObject(this.renderResult);
 		out.writeObject(getHeaders());
 //		out.writeBoolean(eager);
 //		out.writeUTF(resultContent);
@@ -104,7 +101,7 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	@SuppressWarnings("unchecked")
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		renderResult = (RenderResult) in.readObject();
+		this.renderResult = (RenderResult) in.readObject();
 		setHeaders((Map<String, String>) in.readObject());
 	}
 
@@ -112,7 +109,7 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	 * @return the headers
 	 */
 	public Map<String, String> getHeaders() {
-		return headers;
+		return this.headers;
 	}
 
 	/**
@@ -132,7 +129,7 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	 */
 	@Override
 	public String body() {
-		return renderResult == null? null : renderResult.getText();
+		return this.renderResult == null? null : this.renderResult.getText();
 	}
 
 	/* (non-Javadoc)
@@ -140,7 +137,7 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	 */
 	@Override
 	public String contentType() {
-		return renderResult == null? null : renderResult.getContentType();
+		return this.renderResult == null? null : this.renderResult.getContentType();
 	}
 
 //	/* (non-Javadoc)

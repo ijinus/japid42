@@ -1,7 +1,5 @@
 package cn.bran.japid.compiler;
 
-import japa.parser.ast.expr.Expression;
-
 /**
  * a = "asd", b = 12, etc
  * 
@@ -17,7 +15,7 @@ public class NamedArgRuntime {
 	public Object val;
 	@Override
 	public String toString() {
-		return name + " = " + val;
+		return this.name + " = " + this.val;
 	}
 	
 }

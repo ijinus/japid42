@@ -35,7 +35,7 @@ public class JapidFlags {
 		 * @return
 		 */
 		public boolean noLowerThan(LogLevel debug2) {
-			return level >= debug2.level;
+			return this.level >= debug2.level;
 		}
 
 	}

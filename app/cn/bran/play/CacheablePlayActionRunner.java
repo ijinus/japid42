@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 
-import play.cache.Cached;
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.template.RenderResult;
 
@@ -31,6 +30,7 @@ public abstract class CacheablePlayActionRunner extends CacheableRunner {
 	 * @param args
 	 * @deprecated use the other constructor that allow for better integration with CacheFor annotation
 	 */
+	@Deprecated
 	public CacheablePlayActionRunner(String ttl, Object... args) {
 		super(ttl, args);
 //		if (args != null && args.length > 0) {
@@ -68,7 +68,7 @@ public abstract class CacheablePlayActionRunner extends CacheableRunner {
 	@Override
 	protected RenderResult render() {
 		Map<String, String> threadData = JapidController.threadData.get();
-		threadData.put(GlobalSettingsWithJapid.ACTION_METHOD, controllerClass.getName() + "." + actionName);
+		threadData.put(GlobalSettingsWithJapid.ACTION_METHOD, this.controllerClass.getName() + "." + this.actionName);
 		JapidResult jr = runPlayAction();
 		threadData.remove(GlobalSettingsWithJapid.ACTION_METHOD);
 		RenderResult rr = jr.getRenderResult();
@@ -78,8 +78,9 @@ public abstract class CacheablePlayActionRunner extends CacheableRunner {
 	/**
 	 * @return
 	 */
+	@Override
 	protected boolean shouldCache() {
-		fillCacheFor(controllerClass, actionName);
+		fillCacheFor(this.controllerClass, this.actionName);
 		return super.shouldCache();
 	}
 

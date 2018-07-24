@@ -39,8 +39,8 @@ public abstract class JapidTemplateBase extends JapidTemplateBaseWithoutPlay {
 	 * @author Bing Ran (bing.ran@gmail.com)
 	 */
 	private void initme() {
-		if (actionRunners == null) {
-			actionRunners = new TreeMap<Integer, cn.bran.japid.template.ActionRunner>();
+		if (this.actionRunners == null) {
+			this.actionRunners = new TreeMap<Integer, cn.bran.japid.template.ActionRunner>();
 		}
 	}
 
@@ -58,7 +58,7 @@ public abstract class JapidTemplateBase extends JapidTemplateBaseWithoutPlay {
 	protected TreeMap<Integer, cn.bran.japid.template.ActionRunner> actionRunners;// = new TreeMap<Integer, cn.bran.japid.template.ActionRunner>();
 
 	public TreeMap<Integer, cn.bran.japid.template.ActionRunner> getActionRunners() {
-		return actionRunners;
+		return this.actionRunners;
 	}
 
 	public JapidTemplateBaseWithoutPlay setActionRunners(
@@ -67,8 +67,9 @@ public abstract class JapidTemplateBase extends JapidTemplateBaseWithoutPlay {
 		return this;
 	}
 
+	@Override
 	protected cn.bran.japid.template.RenderResult getRenderResult() {
-		return new cn.bran.japid.template.RenderResultPartial(getHeaders(), getOut(), renderingTime, actionRunners, sourceTemplate);
+		return new cn.bran.japid.template.RenderResultPartial(getHeaders(), getOut(), this.renderingTime, this.actionRunners, this.sourceTemplate);
 	}
 
 }

@@ -1,12 +1,8 @@
 package japidviews;
 import java.util.List;
 
-import play.i18n.Lang;
-import play.mvc.Http.Context.Implicit;
-import play.mvc.Http.Flash;
-import play.mvc.Http.Request;
-import play.mvc.Http.Response;
-import play.mvc.Http.Session;
+import javax.xml.ws.Response;
+
 import cn.bran.japid.tags.Each;
 import cn.bran.play.routing.RouteEntry;
 //
@@ -24,11 +20,11 @@ public class dev404 extends cn.bran.play.JapidTemplateBase
 // - add implicit fields with Play
 boolean hasHttpContext = play.mvc.Http.Context.current.get() != null ? true : false;
 
-	final Request request = hasHttpContext? Implicit.request() : null;
-	final Response response = hasHttpContext ? Implicit.response() : null;
-	final Session session = hasHttpContext ? Implicit.session() : null;
-	final Flash flash = hasHttpContext ? Implicit.flash() : null;
-	final Lang lang = hasHttpContext ? Implicit.lang() : null;
+	final Request request = this.hasHttpContext? Implicit.request() : null;
+	final Response response = this.hasHttpContext ? Implicit.response() : null;
+	final Session session = this.hasHttpContext ? Implicit.session() : null;
+	final Flash flash = this.hasHttpContext ? Implicit.flash() : null;
+	final Lang lang = this.hasHttpContext ? Implicit.lang() : null;
 	final play.Play _play = new play.Play(); 
 
 // - end of implicit fields with Play 
@@ -65,7 +61,7 @@ boolean hasHttpContext = play.mvc.Http.Context.current.get() != null ? true : fa
 		this.jaxRoutes = jaxRoutes;
 		long __t = -1;
 		try {super.layout();} catch (RuntimeException e) { super.handleException(e);} // line 2
-		return new cn.bran.japid.template.RenderResultPartial(getHeaders(), getOut(), __t, actionRunners, sourceTemplate);
+		return new cn.bran.japid.template.RenderResultPartial(getHeaders(), getOut(), __t, this.actionRunners, sourceTemplate);
 	}
 
 	public static cn.bran.japid.template.RenderResult apply(play.mvc.Http.RequestHeader reqheader,List<scala.Tuple3<String, String, String>> routes,List<RouteEntry> jaxRoutes) {
@@ -186,7 +182,7 @@ boolean hasHttpContext = play.mvc.Http.Context.current.get() != null ? true : fa
 "\n" + 
 "		<p id=\"detail\">\n" + 
 "			For request '");// line 6
-		p(reqheader);// line 115
+		p(this.reqheader);// line 115
 		p("'\n" + 
 "		</p>\n" + 
 "		\n" + 
@@ -195,14 +191,15 @@ boolean hasHttpContext = play.mvc.Http.Context.current.get() != null ? true : fa
 "        	</h2>\n" + 
 "\n" + 
 "		");// line 115
-		if(asBoolean(jaxRoutes)) {// line 122
+		if(asBoolean(this.jaxRoutes)) {// line 122
 		p("		    <h3>\n" + 
 "    			Routes derived from JAX-RS annotations:\n" + 
 "        	</h3>\n" + 
 "            <div>\n" + 
 "    			");// line 122
 		final Each _Each0 = new Each(getOut()); _Each0.setOut(getOut()); _Each0.render(// line 127
-jaxRoutes, new Each.DoBody<RouteEntry>(){ // line 127
+this.jaxRoutes, new Each.DoBody<RouteEntry>(){ // line 127
+@Override
 public void render(final RouteEntry r, final int _size, final int _index, final boolean _isOdd, final String _parity, final boolean _isFirst, final boolean _isLast) { // line 127
 // line 127
 		p("    				<pre><span class=\"line\">");// line 127
@@ -221,13 +218,13 @@ public void render(final RouteEntry r, final int _size, final int _index, final 
 StringBuilder oriBuffer;
 @Override
 public void setBuffer(StringBuilder sb) {
-	oriBuffer = getOut();
+	this.oriBuffer = getOut();
 	setOut(sb);
 }
 
 @Override
 public void resetBuffer() {
-	setOut(oriBuffer);
+	setOut(this.oriBuffer);
 }
 
 }
@@ -266,13 +263,13 @@ public void render(final scala.Tuple3 r, final int _size, final int _index, fina
 StringBuilder oriBuffer;
 @Override
 public void setBuffer(StringBuilder sb) {
-	oriBuffer = getOut();
+	this.oriBuffer = getOut();
 	setOut(sb);
 }
 
 @Override
 public void resetBuffer() {
-	setOut(oriBuffer);
+	setOut(this.oriBuffer);
 }
 
 }

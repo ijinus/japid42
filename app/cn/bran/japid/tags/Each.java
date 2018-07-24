@@ -13,10 +13,6 @@
  */
 package cn.bran.japid.tags;
 
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Iterator;
 

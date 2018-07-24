@@ -46,7 +46,7 @@ public class RenderResultBundler implements Serializable {
 	 * @return the fully interpolated content
 	 */
 	public StringBundler getContent() {
-		return content;
+		return this.content;
 	}
 
 	public long getRenderTime() {
@@ -59,8 +59,8 @@ public class RenderResultBundler implements Serializable {
 
 	@Override
 	public String toString() {
-		if (content != null) {
-			return content.toString();
+		if (this.content != null) {
+			return this.content.toString();
 		}
 		else {
 			return "RenderResult: null";

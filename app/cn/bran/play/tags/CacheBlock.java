@@ -13,8 +13,8 @@
  */
 package cn.bran.play.tags;
 
-import play.cache.Cache;
-import play.libs.Time;
+import java.sql.Time;
+
 import cn.bran.japid.tags.SimpleTag;
 
 /**

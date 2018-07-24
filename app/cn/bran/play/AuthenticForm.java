@@ -8,10 +8,6 @@ import java.util.Map;
 import cn.bran.japid.template.AuthenticityCheck;
 import cn.bran.japid.util.StringUtils;
 
-import play.api.libs.Crypto;
-import play.data.Form;
-import play.mvc.Http.Session;
-
 /**
  * add authenticity token check in form binding
  * 

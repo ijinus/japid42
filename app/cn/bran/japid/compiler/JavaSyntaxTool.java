@@ -1,97 +1,5 @@
 package cn.bran.japid.compiler;
 
-import japa.parser.JavaParser;
-import japa.parser.ParseException;
-import japa.parser.TokenMgrError;
-import japa.parser.ast.BlockComment;
-import japa.parser.ast.CompilationUnit;
-import japa.parser.ast.ImportDeclaration;
-import japa.parser.ast.LineComment;
-import japa.parser.ast.Node;
-import japa.parser.ast.PackageDeclaration;
-import japa.parser.ast.TypeParameter;
-import japa.parser.ast.body.AnnotationDeclaration;
-import japa.parser.ast.body.AnnotationMemberDeclaration;
-import japa.parser.ast.body.ClassOrInterfaceDeclaration;
-import japa.parser.ast.body.ConstructorDeclaration;
-import japa.parser.ast.body.EmptyMemberDeclaration;
-import japa.parser.ast.body.EmptyTypeDeclaration;
-import japa.parser.ast.body.EnumConstantDeclaration;
-import japa.parser.ast.body.EnumDeclaration;
-import japa.parser.ast.body.FieldDeclaration;
-import japa.parser.ast.body.InitializerDeclaration;
-import japa.parser.ast.body.JavadocComment;
-import japa.parser.ast.body.MethodDeclaration;
-import japa.parser.ast.body.ModifierSet;
-import japa.parser.ast.body.Parameter;
-import japa.parser.ast.body.VariableDeclarator;
-import japa.parser.ast.body.VariableDeclaratorId;
-import japa.parser.ast.expr.AnnotationExpr;
-import japa.parser.ast.expr.ArrayAccessExpr;
-import japa.parser.ast.expr.ArrayCreationExpr;
-import japa.parser.ast.expr.ArrayInitializerExpr;
-import japa.parser.ast.expr.AssignExpr;
-import japa.parser.ast.expr.BinaryExpr;
-import japa.parser.ast.expr.BinaryExpr.Operator;
-import japa.parser.ast.expr.BooleanLiteralExpr;
-import japa.parser.ast.expr.CastExpr;
-import japa.parser.ast.expr.CharLiteralExpr;
-import japa.parser.ast.expr.ClassExpr;
-import japa.parser.ast.expr.ConditionalExpr;
-import japa.parser.ast.expr.DoubleLiteralExpr;
-import japa.parser.ast.expr.EnclosedExpr;
-import japa.parser.ast.expr.Expression;
-import japa.parser.ast.expr.FieldAccessExpr;
-import japa.parser.ast.expr.InstanceOfExpr;
-import japa.parser.ast.expr.IntegerLiteralExpr;
-import japa.parser.ast.expr.IntegerLiteralMinValueExpr;
-import japa.parser.ast.expr.LongLiteralExpr;
-import japa.parser.ast.expr.LongLiteralMinValueExpr;
-import japa.parser.ast.expr.MarkerAnnotationExpr;
-import japa.parser.ast.expr.MemberValuePair;
-import japa.parser.ast.expr.MethodCallExpr;
-import japa.parser.ast.expr.NameExpr;
-import japa.parser.ast.expr.NormalAnnotationExpr;
-import japa.parser.ast.expr.NullLiteralExpr;
-import japa.parser.ast.expr.ObjectCreationExpr;
-import japa.parser.ast.expr.QualifiedNameExpr;
-import japa.parser.ast.expr.SingleMemberAnnotationExpr;
-import japa.parser.ast.expr.StringLiteralExpr;
-import japa.parser.ast.expr.SuperExpr;
-import japa.parser.ast.expr.ThisExpr;
-import japa.parser.ast.expr.UnaryExpr;
-import japa.parser.ast.expr.VariableDeclarationExpr;
-import japa.parser.ast.stmt.AssertStmt;
-import japa.parser.ast.stmt.BlockStmt;
-import japa.parser.ast.stmt.BreakStmt;
-import japa.parser.ast.stmt.CatchClause;
-import japa.parser.ast.stmt.ContinueStmt;
-import japa.parser.ast.stmt.DoStmt;
-import japa.parser.ast.stmt.EmptyStmt;
-import japa.parser.ast.stmt.ExplicitConstructorInvocationStmt;
-import japa.parser.ast.stmt.ExpressionStmt;
-import japa.parser.ast.stmt.ForStmt;
-import japa.parser.ast.stmt.ForeachStmt;
-import japa.parser.ast.stmt.IfStmt;
-import japa.parser.ast.stmt.LabeledStmt;
-import japa.parser.ast.stmt.ReturnStmt;
-import japa.parser.ast.stmt.SwitchEntryStmt;
-import japa.parser.ast.stmt.SwitchStmt;
-import japa.parser.ast.stmt.SynchronizedStmt;
-import japa.parser.ast.stmt.ThrowStmt;
-import japa.parser.ast.stmt.TryStmt;
-import japa.parser.ast.stmt.TypeDeclarationStmt;
-import japa.parser.ast.stmt.WhileStmt;
-import japa.parser.ast.type.ClassOrInterfaceType;
-import japa.parser.ast.type.PrimitiveType;
-import japa.parser.ast.type.ReferenceType;
-import japa.parser.ast.type.Type;
-import japa.parser.ast.type.VoidType;
-import japa.parser.ast.type.WildcardType;
-import japa.parser.ast.visitor.GenericVisitor;
-import japa.parser.ast.visitor.VoidVisitor;
-import japa.parser.ast.visitor.VoidVisitorAdapter;
-
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -99,6 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.lang.model.type.PrimitiveType;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.VoidType;
 
 public class JavaSyntaxTool {
 	private static final String UTF_8 = "UTF-8";
@@ -157,6 +69,7 @@ public class JavaSyntaxTool {
 	 * @author Bing Ran<bing_ran@hotmail.com>
 	 * @deprecated use the original Parameter for complete control
 	 */
+	@Deprecated
 	public static class Param {
 		public String type, name;
 
@@ -288,21 +201,21 @@ public class JavaSyntaxTool {
 					if (args != null)
 						for (Expression expr : args) {
 							if (expr instanceof AssignExpr) {
-								if (hasUnNamed)
+								if (this.hasUnNamed)
 									throw new RuntimeException(
 											"the line has mixed named and un-named arg list. It's not valid in Japid tag invocation. It must be all-or-none.: "
 													+ finalLine);
-								hasNamed = true;
+								this.hasNamed = true;
 								AssignExpr ae = (AssignExpr) expr;
 								NamedArg na = new NamedArg(ae.getTarget(),
 										ae.getValue());
 								ret.add(na);
 							} else {
-								if (hasNamed)
+								if (this.hasNamed)
 									throw new RuntimeException(
 											"the line has mixed named and un-named arg list. It's not valid in Japid tag invocation. It must be all-or-none.: "
 													+ finalLine);
-								hasUnNamed = true;
+								this.hasUnNamed = true;
 							}
 						}
 				}
@@ -952,482 +865,482 @@ public class JavaSyntaxTool {
 				@Override
 				public void visit(AnnotationDeclaration n, Object arg) {
 					
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(AnnotationMemberDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ArrayAccessExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ArrayCreationExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ArrayInitializerExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(AssertStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(AssignExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(BinaryExpr n, Object arg) {
 					if (n.getOperator() == Operator.binOr) {
-						nodes.add(new CodeNode(nested++, new BinaryOrExpr(n)));
+						nodes.add(new CodeNode(this.nested++, new BinaryOrExpr(n)));
 					}
 					else {
-						nodes.add(new CodeNode(nested++, n));
+						nodes.add(new CodeNode(this.nested++, n));
 					}
 					super.visit(n, arg); 
-					nested--;
+					this.nested--;
 				}
 
 				@Override
 				public void visit(BlockComment n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(BlockStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(BooleanLiteralExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(BreakStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(CastExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(CatchClause n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(CharLiteralExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ClassExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ClassOrInterfaceDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ClassOrInterfaceType n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(CompilationUnit n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ConditionalExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ConstructorDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ContinueStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(DoStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(DoubleLiteralExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(EmptyMemberDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(EmptyStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(EmptyTypeDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(EnclosedExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(EnumConstantDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(EnumDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ExplicitConstructorInvocationStmt n,
 						Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ExpressionStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(FieldAccessExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(FieldDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ForeachStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ForStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(IfStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ImportDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(InitializerDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(InstanceOfExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(IntegerLiteralExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(IntegerLiteralMinValueExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(JavadocComment n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(LabeledStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(LineComment n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(LongLiteralExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(LongLiteralMinValueExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(MarkerAnnotationExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(MemberValuePair n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(MethodCallExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(MethodDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(NameExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(NormalAnnotationExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(NullLiteralExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ObjectCreationExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(PackageDeclaration n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(Parameter n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(PrimitiveType n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(QualifiedNameExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ReferenceType n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ReturnStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(SingleMemberAnnotationExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(StringLiteralExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(SuperExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(SwitchEntryStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(SwitchStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(SynchronizedStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ThisExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(ThrowStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(TryStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(TypeDeclarationStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(TypeParameter n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(UnaryExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(VariableDeclarationExpr n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(VariableDeclarator n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(VariableDeclaratorId n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(VoidType n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(WhileStmt n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 
 				@Override
 				public void visit(WildcardType n, Object arg) {
 
-					nodes.add(new CodeNode(nested++, n)); super.visit(n, arg); nested--;
+					nodes.add(new CodeNode(this.nested++, n)); super.visit(n, arg); this.nested--;
 				}
 				
 			};

@@ -11,23 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-
-import org.reflections.Reflections;
-import org.reflections.scanners.TypeAnnotationsScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
-
 import cn.bran.japid.util.JapidFlags;
-import play.Application;
-import play.GlobalSettings;
-import play.api.mvc.Handler;
-import play.libs.F.Tuple;
-import play.mvc.Result;
-import play.mvc.SimpleResult;
 
 /**
  * @author bran

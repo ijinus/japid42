@@ -1,5 +1,6 @@
 package cn.bran.play;
 
+import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,18 +9,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import javax.mail.internet.InternetAddress;
-
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailAttachment;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.mail.MultiPartEmail;
-
-import play.Logger;
-import play.api.PlayException;
-import play.api.UnexpectedException;
-import scala.Option;
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.template.RenderResult;
 import cn.bran.japid.util.StackTraceUtils;

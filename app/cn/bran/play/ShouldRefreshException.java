@@ -1,7 +1,5 @@
 package cn.bran.play;
 
-import cn.bran.japid.template.RenderResult;
-
 /**
  * to indicate the item in cache will expire soon and should be updated now
  * 

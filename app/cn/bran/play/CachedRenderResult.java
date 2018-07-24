@@ -19,7 +19,7 @@ public class CachedRenderResult implements Serializable{
 		this.rr = rr;
 	}
 	public boolean isExpired() {
-		return status.isExpired();
+		return this.status.isExpired();
 	}
 	
 }

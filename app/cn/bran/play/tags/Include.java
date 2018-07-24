@@ -13,17 +13,9 @@
  */
 package cn.bran.play.tags;
 
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
+import java.sql.Time;
 
 import cn.bran.japid.tags.SimpleTag;
-
-import play.cache.Cache;
-import play.libs.Time;
 
 /**
  * include tag for including a action result to the parent template

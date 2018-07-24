@@ -74,6 +74,7 @@ public class StackTraceUtils {
 	 * @return
      * @deprecated deprecated using stacktrace to find out about invokers for performance reason. Should have used JapidController.thread
 	 */
+	@Deprecated
 	public static String getJapidControllerInvoker(String method) {
 //		JapidFlags.log("deprecated using stacktrace to find out about invokers for performance reason. Should have used JapidController.threadData");
 		return getInvokerOf(JapidController.class.getName(), method);
