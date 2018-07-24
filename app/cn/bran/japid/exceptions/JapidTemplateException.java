@@ -16,9 +16,9 @@ public class JapidTemplateException extends JapidRuntimeException {
 	/**
 	 * @param string
 	 */
-	public JapidTemplateException(String title, String description, int errLineNum, String sourceName, String sourceCode) {
-		super(title, description);
-		this.errLineNum = errLineNum;
+	public JapidTemplateException(String _title, String _description, int _errLineNum, String sourceName, String sourceCode) {
+		super(_title, _description);
+		this.errLineNum = _errLineNum;
 		this.soureName = sourceName;
 		this.srcCode = sourceCode;
 		this.interestingLines = getInterestingLines();
@@ -27,8 +27,8 @@ public class JapidTemplateException extends JapidRuntimeException {
 	/**
 	 * @param e2
 	 */
-	public JapidTemplateException(Throwable e) {
-		super(e.getClass().getName(), e.getMessage());
+	public JapidTemplateException(Throwable _e) {
+		super(_e.getClass().getName(), _e.getMessage());
 	}
 
 	public Throwable e;

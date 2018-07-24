@@ -7,8 +7,26 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
+import play.Application;
+import play.GlobalSettings;
+import play.Play;
+import play.cache.Cache;
+import play.cache.Cached;
+import play.http.HttpRequestHandler;
+import play.mvc.Action;
+import play.mvc.Http.Context;
+import play.mvc.Http.Request;
+import play.mvc.Http.RequestHeader;
+import play.mvc.Result;
+import play.mvc.Results;
+import play.routing.Router;
+import scala.Option;
+import scala.Tuple3;
+import scala.collection.Seq;
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.util.JapidFlags;
 import cn.bran.japid.util.StringUtils;
@@ -29,7 +47,7 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 	private boolean cacheResponse = true; // support @Cache annotation
 	private boolean useJaxrs = true;
 
-//	
+	
 //	public GlobalSettingsWithJapid() {
 //		System.out.println("GlobalSettingsWithJapid.<init>()");
 //	}
@@ -37,7 +55,7 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 //	static {
 //		System.out.println("GlobalSettingsWithJapid.<cinit>()");
 //	}
-//
+
 	/**
 	 * @author Bing Ran (bing.ran@hotmail.com)
 	 * @param app
@@ -74,16 +92,14 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 
 	}
 
-	protected List<Tuple3<String, String, String>> getPlayRoutes() {
-		play.api.Application realApp = _app.getWrappedApplication();
-		Option<Routes> routes = realApp.routes();
-		if (routes.isDefined()) {
-			Routes r = routes.get();
-			Seq<Tuple3<String, String, String>> docs = r.documentation();
-			return scala.collection.JavaConversions.seqAsJavaList(docs);
-		}
-		return null;
-	}
+	// // Used ?? Remove it
+	// protected List<Tuple3<String, String, String>> getPlayRoutes() {
+	//
+	// // Not sure about the replacement by injection: TODO verify it
+	// Router routes = play.api.Play.current().injector().instanceOf(Router.class);
+	// Seq<Tuple3<String, String, String>> docs = routes.documentation();
+	// return scala.collection.JavaConversions.seqAsJavaList(docs);
+	// }
 
 	private void printRouteTable() {
 		JapidFlags.out("<==== Route table derived from jaxRS annotations =====>");
@@ -109,7 +125,8 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 		final Map<String, String> threadData = JapidController.threadData.get();
 		if (!this.cacheResponse) {
 			return new Action.Simple() {
-				public Promise<SimpleResult> call(Context ctx) throws Throwable {
+				@Override
+				public CompletionStage<Result> call(Context ctx) {
 					// pass the FQN to the japid controller to determine the
 					// template to use
 					// will be cleared right when the value is retrieved in the
@@ -117,7 +134,7 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 					// assuming the delegate call will take place in the same
 					// thread
 					threadData.put(ACTION_METHOD, actionName);
-					Promise<SimpleResult> call = delegate.call(ctx);
+					CompletionStage<Result> call = this.delegate.call(ctx);
 					threadData.remove(ACTION_METHOD);
 					return call;
 				}
@@ -125,11 +142,12 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 		}
 
 		return new Action<Cached>() {
-			public Promise<SimpleResult> call(Context ctx) {
+			@Override
+			public CompletionStage<Result> call(Context ctx) {
 				try {
 					beforeActionInvocation(ctx, actionMethod);
 
-					SimpleResult result = null;
+					Result result = null;
 					Request req = ctx.request();
 					String method = req.method();
 					int duration = 0;
@@ -142,23 +160,23 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 							key = "urlcache:" + req.uri() + ":" + req.queryString();
 						}
 						duration = cachAnno.duration();
-						result = (SimpleResult) Cache.get(key);
+						result = (Result) Cache.get(key);
 					}
 					if (result == null) {
 						// pass the action name hint to japid controller
 						threadData.put(ACTION_METHOD, actionName);
-						Promise<SimpleResult> ps = delegate.call(ctx);
+						CompletionStage<Result> ps = this.delegate.call(ctx);
 						threadData.remove(ACTION_METHOD);
 
 						if (!StringUtils.isEmpty(key) && duration > 0) {
-							result = ps.get(1, TimeUnit.MILLISECONDS);
+							result = ps.toCompletableFuture().get(1, TimeUnit.MILLISECONDS);
 							Cache.set(key, result, duration);
 						}
 						onActionInvocationResult(ctx);
 						return ps;
 					} else {
 						onActionInvocationResult(ctx);
-						return Promise.pure(result);
+						return CompletableFuture.completedFuture(result);
 					}
 
 				} catch (RuntimeException e) {
@@ -182,12 +200,12 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 	}
 
 	@Override
-	public Handler onRouteRequest(RequestHeader request) {
+	public play.api.mvc.Handler onRouteRequest(RequestHeader request) {
 		if (this.useJaxrs) {
 //			if (_app.isDev())
 //				JapidFlags.debug("route with Japid router");
 
-			Handler handlerFor = JaxrsRouter.handlerFor(request);
+			play.api.mvc.Handler handlerFor = JaxrsRouter.handlerFor(request);
 			if (handlerFor == null) {
 				handlerFor = super.onRouteRequest(request);
 				// if (handlerFor == null && _app.isDev()) {
@@ -340,11 +358,11 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 	/**
 	 * set to use Jax-RS protocol based routing mechanism
 	 * 
-	 * @param useJaxrs
+	 * @param _useJaxrs
 	 *            the useJaxrs to set
 	 */
-	public void setUseJapidRouting(boolean useJaxrs) {
-		this.useJaxrs = useJaxrs;
+	public void setUseJapidRouting(boolean _useJaxrs) {
+		this.useJaxrs = _useJaxrs;
 	}
 
 	/**
@@ -362,11 +380,14 @@ public class GlobalSettingsWithJapid extends GlobalSettings {
 	 * @see play.GlobalSettings#onHandlerNotFound(play.mvc.Http.RequestHeader)
 	 */
 	@Override
-	public Promise<SimpleResult> onHandlerNotFound(RequestHeader arg0) {
+	public CompletionStage<Result> onHandlerNotFound(RequestHeader arg0) {
 		if (_app.isDev()) {
-			List<Tuple3<String, String, String>> playRoutes = getPlayRoutes();
+			// List<Tuple3<String, String, String>> playRoutes = getPlayRoutes(); // just used to display list of routes in case of 404
+			List<Tuple3<String, String, String>> playRoutes = null; // not used ...
+
 			JapidResult r = new JapidResult(JapidRenderer.renderWith(japidviews.dev404.class, arg0, playRoutes, JaxrsRouter.getRouteTable()));
-			Promise<SimpleResult> pure = play.libs.F.Promise.pure((SimpleResult) Results.notFound(r));
+			// TODO check the migration r -> r.toString()
+			CompletionStage<Result> pure = CompletableFuture.completedFuture(Results.notFound(r.toString()));
 			return pure;
 		} else
 			return super.onHandlerNotFound(arg0);

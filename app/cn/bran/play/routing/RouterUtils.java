@@ -13,6 +13,23 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.HEAD;
+import javax.ws.rs.OPTIONS;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+
+import org.reflections.ReflectionUtils;
+
+import play.libs.F.Tuple;
+
+import com.google.common.base.Predicates;
+
 /**
  * @author bran
  * 
@@ -45,10 +62,10 @@ public class RouterUtils {
 	static boolean isResourcePath(String uri, String path) {
 		String r = path.replaceAll(JaxrsRouter.urlParamCapture, "(.*)");
 		Pattern p = Pattern.compile(r);
-		if (!RegMatch.findAllIn(p, uri).isEmpty())
+		if (!RegMatch.findAllIn(p, uri).isEmpty()){
 			return true;
-		else
-			return false;
+		}
+		return false;
 	}
 
 	static Class<? extends Annotation> findHttpMethodAnnotation(String httpMethod) {
@@ -220,7 +237,7 @@ public class RouterUtils {
 									+ "#" + method);
 			}
 			argValues = argVals.toArray(argValues);
-			return (play.mvc.Result) method.invoke(global.getControllerInstance(targetClass), argValues);
+			return (play.mvc.Result) method.invoke(play.Play.application().injector().instanceOf(targetClass), argValues);
 		} catch (InvocationTargetException cause) {
 			System.err.println("Exception occured while trying to invoke: " + targetClass.getName() + "#"
 					+ method.getName() + " with " + extractedArgs + " for uri:" + r.path());

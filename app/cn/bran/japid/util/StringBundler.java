@@ -60,9 +60,8 @@ public class StringBundler {
 	public StringBundler append(boolean b) {
 		if (b) {
 			return append(_TRUE);
-		} else {
-			return append(_FALSE);
 		}
+		return append(_FALSE);
 	}
 
 	public StringBundler append(double d) {

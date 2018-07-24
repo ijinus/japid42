@@ -5,6 +5,8 @@ package cn.bran.japid.rendererloader;
 
 import java.util.StringTokenizer;
 
+import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
+
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.util.JapidFlags;
 
@@ -18,7 +20,8 @@ final class CompilationUnit implements ICompilationUnit {
 	final private char[] typeName;
 	final private char[][] packageName;
 
-	CompilationUnit(String pClazzName) {
+	CompilationUnit(String _pClazzName) {
+		String pClazzName = _pClazzName;
 		this.clazzName = pClazzName;
 		if (pClazzName.contains("$")) {
 			pClazzName = pClazzName.substring(0, pClazzName.indexOf("$"));

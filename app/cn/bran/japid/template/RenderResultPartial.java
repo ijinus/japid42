@@ -28,15 +28,15 @@ public class RenderResultPartial extends RenderResult {
 		return this.actionRunners;
 	}
 
-	public RenderResultPartial(Map<String, String> headers, StringBuilder content, long renderTime, Map<Integer, ActionRunner> actions) {
-		super(headers, content, renderTime);
+	public RenderResultPartial(Map<String, String> headers, StringBuilder content, long _renderTime, Map<Integer, ActionRunner> actions) {
+		super(headers, content, _renderTime);
 		this.actionRunners = actions;
 	}
 	
-	public RenderResultPartial(Map<String, String> headers, StringBuilder content, long renderTime, Map<Integer, ActionRunner> actions, String viewName) {
-		super(headers, content, renderTime);
+	public RenderResultPartial(Map<String, String> headers, StringBuilder content, long _renderTime, Map<Integer, ActionRunner> actions, String _viewName) {
+		super(headers, content, _renderTime);
 		this.actionRunners = actions;
-		this.viewName = viewName;
+		this.viewName = _viewName;
 	}
 	
 	public RenderResultPartial() {

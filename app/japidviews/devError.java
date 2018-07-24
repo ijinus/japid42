@@ -1,11 +1,12 @@
 package japidviews;
 import java.util.TreeMap;
+import cn.bran.play.JapidTemplateBase;
 
-public class devError extends cn.bran.play.JapidTemplateBase
+public class devError extends JapidTemplateBase
 {
 	private static final long serialVersionUID = -1632766355048011190L;
 
-	public static final String sourceTemplate = "/japidviews/devError.html";
+	public static final String sourceTemplate1 = "/japidviews/devError.html";
 	{
 		putHeader("Content-Type", "text/html; charset=utf-8");
 		setContentType("text/html; charset=utf-8");
@@ -42,16 +43,16 @@ public class devError extends cn.bran.play.JapidTemplateBase
 		setArgNames(argNames);
 		setArgTypes(argTypes);
 		setArgDefaults(argDefaults);
-		setSourceTemplate(sourceTemplate);
+		setSourceTemplate(sourceTemplate1);
 	}
 ////// end of named args stuff
 
 	private cn.bran.japid.exceptions.JapidTemplateException error; // line 1
-	public cn.bran.japid.template.RenderResult render(cn.bran.japid.exceptions.JapidTemplateException error) {
-		this.error = error;
+	public cn.bran.japid.template.RenderResult render(cn.bran.japid.exceptions.JapidTemplateException _error) {
+		this.error = _error;
 		long __t = -1;
 		try {super.layout();} catch (RuntimeException e) { super.handleException(e);} // line 1
-		return new cn.bran.japid.template.RenderResultPartial(getHeaders(), getOut(), __t, this.actionRunners, sourceTemplate);
+		return new cn.bran.japid.template.RenderResultPartial(getHeaders(), getOut(), __t, this.actionRunners, sourceTemplate1);
 	}
 
 	public static cn.bran.japid.template.RenderResult apply(cn.bran.japid.exceptions.JapidTemplateException error) {
@@ -59,7 +60,7 @@ public class devError extends cn.bran.play.JapidTemplateBase
 	}
 
 	@Override protected void doLayout() {
-		beginDoLayout(sourceTemplate);
+		beginDoLayout(sourceTemplate1);
 //------
 ;// line 1
 		p("\n");// line 1
@@ -192,7 +193,7 @@ public class devError extends cn.bran.play.JapidTemplateBase
 		p("		</div>\n" + "			    \n" + "	</body>\n" + "</html>\n" + "\n" + "\n" + "\n" + "\n" + "\n" + "\n" + "\n");// line
 																													// 123
 
-		endDoLayout(sourceTemplate);
+		endDoLayout(sourceTemplate1);
 	}
 
 }

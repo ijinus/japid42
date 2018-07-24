@@ -34,14 +34,14 @@ public class RendererClass implements Serializable{
 	public Class<? extends JapidTemplateBaseWithoutPlay> getClz() {
 		return this.clz;
 	}
-	public void setClz(Class<? extends JapidTemplateBaseWithoutPlay> clz) {
-		this.clz = clz;
-		if (clz == null)
+	public void setClz(Class<? extends JapidTemplateBaseWithoutPlay> _clz) {
+		this.clz = _clz;
+		if (_clz == null)
 			this.setConstructor(null);
 		else 
 			try {
-				if (!clz.getName().contains("$"))
-					this.setConstructor(clz.getConstructor(StringBuilder.class));
+				if (!_clz.getName().contains("$"))
+					this.setConstructor(_clz.getConstructor(StringBuilder.class));
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -49,8 +49,8 @@ public class RendererClass implements Serializable{
 	public String getClassName() {
 		return this.className;
 	}
-	public void setClassName(String className) {
-		this.className = className;
+	public void setClassName(String _className) {
+		this.className = _className;
 	}
 	public String getJavaSourceCode() {
 		return this.javaSourceCode;
@@ -65,8 +65,8 @@ public class RendererClass implements Serializable{
 	public byte[] getBytecode() {
 		return this.bytecode;
 	}
-	public void setBytecode(byte[] bytecode) {
-		this.bytecode = bytecode;
+	public void setBytecode(byte[] _bytecode) {
+		this.bytecode = _bytecode;
 	}
 	
 	public void clear() {
@@ -120,10 +120,15 @@ public class RendererClass implements Serializable{
 		String line = splitSrc[lineNumber - 1];
 		// can we have a line marker?
 		int lineMarker = line.lastIndexOf("// line ");
-		if (lineMarker > 0) 
-			return Integer.parseInt(line.substring(lineMarker + 8).trim());
-		else
-			return -1;	
+		if (lineMarker > 0){ 
+			String trim = line.substring(lineMarker + 8).trim();
+			int commaPosition = trim.indexOf(",");
+			if(commaPosition>=0){
+				trim = trim.substring(0, trim.indexOf(","));
+			}
+			return Integer.parseInt(trim);
+		}
+		return -1;	
 
 	}
 	/**
@@ -179,21 +184,19 @@ public class RendererClass implements Serializable{
 	/**
 	 * @param scripTimestamp the scripTimestamp to set
 	 */
-	public void setScriptTimestamp(long scriptTimestamp) {
-		this.scriptTimestamp = scriptTimestamp;
+	public void setScriptTimestamp(long _scriptTimestamp) {
+		this.scriptTimestamp = _scriptTimestamp;
 	}
 	/**
 	 * @author Bing Ran (bing.ran@hotmail.com)
 	 * @return
 	 */
 	public String getScriptPath() {
-		File scriptFile = getScriptFile();
-		if (scriptFile != null && scriptFile.exists()) {
-			return scriptFile.getPath();
+		File scriptFile1 = getScriptFile();
+		if (scriptFile1 != null && scriptFile1.exists()) {
+			return scriptFile1.getPath();
 		}
-		else {
-			return this.className;
-		}
+		return this.className;
 	}
 	/**
 	 * set the contributor. Options are: "jar"
@@ -216,9 +219,10 @@ public class RendererClass implements Serializable{
 	 * @return
 	 */
 	public boolean fromJar() {
-		if (this.contributor != null && this.contributor.startsWith("jar:"))
+		if (this.contributor != null && this.contributor.startsWith("jar:")){
 			return true;
-		else return false;
+		}
+		return false;
 	}
 
 }

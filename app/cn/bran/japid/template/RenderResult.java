@@ -34,10 +34,10 @@ public class RenderResult implements Externalizable {
 	long renderTime; // in us, (micro-second) for recording the time to render.
 	private Map<String, String> headers = new HashMap<String, String>();
 	
-	public RenderResult(Map<String, String> headers , StringBuilder content, long renderTime) {
-		this.content = content;
-		this.renderTime = renderTime;
-		this.headers = headers;
+	public RenderResult(Map<String, String> _headers , StringBuilder _content, long _renderTime) {
+		this.content = _content;
+		this.renderTime = _renderTime;
+		this.headers = _headers;
 	}
 
 	public RenderResult() {

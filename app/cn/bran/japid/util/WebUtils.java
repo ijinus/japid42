@@ -15,7 +15,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import cn.bran.japid.template.AuthenticityCheck;
+
+import play.api.libs.Crypto;
+import play.i18n.Lang;
+import play.i18n.Messages;
+import play.mvc.Http.Context;
 
 public class WebUtils {
     public static String fastformat(Date date, String pattern) {
@@ -25,10 +32,10 @@ public class WebUtils {
 
 	// Note, the {@code JavaExtensions} class in Play! has lots of formatting methods
 	public static String numOf(Collection c) {
-		if (c == null)
+		if (c == null){
 			return "no";
-		else
-			return String.valueOf(c.size());
+		}
+		return String.valueOf(c.size());
 	}
 	
 	/**
@@ -53,10 +60,10 @@ public class WebUtils {
 		}
 		else if (o instanceof Collection){
 			Collection col = ((Collection)o);
-			if (col.size() > 0)
+			if (col.size() > 0){
 				return true;
-			else
-				return false;
+			}
+			return false;
 		}
 		else if (o.getClass().isArray()) {
 			return Array.getLength(o) > 0;
@@ -66,7 +73,7 @@ public class WebUtils {
 		}
 		// anything more?
 		else {
-			r = o != null ? true : false;
+			r =  true;
 		}
 
 		return r;
@@ -137,7 +144,8 @@ public class WebUtils {
         return sb.toString();
     }
 
-    public static String pad(String str, Integer size) {
+    public static String pad(String _str, Integer size) {
+    	String str = _str;
         int t = size - str.length();
         for (int i = 0; i < t; i++) {
             str += "&nbsp;";
@@ -186,9 +194,7 @@ public class WebUtils {
     		Lang lan = play.i18n.Lang.preferred(ctx.request().acceptLanguages());
     		return format(date, pattern, lan.language());
     	}
-    	else {
-    		return format(date, pattern, play.i18n.Lang.defaultLang().language());
-    	}
+		return format(date, pattern, play.i18n.Lang.defaultLang().language());
     }
 
     public static String format(Date date, String pattern, String lang) {
@@ -371,7 +377,8 @@ public class WebUtils {
         return slugify(string, Boolean.TRUE);
     }
 
-    public static String slugify(String string, Boolean lowercase) {
+    public static String slugify(String _string, Boolean lowercase) {
+    	String string = _string;
         string = noAccents(string);
         // Apostrophes.
         string = string.replaceAll("([a-z])'s([^a-z])", "$1s$2");
@@ -382,7 +389,8 @@ public class WebUtils {
         return (lowercase ? string.toLowerCase() : string);
     }
 
-    public static String camelCase(String string) {
+    public static String camelCase(String _string) {
+    	String string = _string;
         string = noAccents(string);
         string = string.replaceAll("[^\\w ]", "");
         StringBuilder result = new StringBuilder(string.length());
@@ -421,7 +429,8 @@ public class WebUtils {
 	
     public static String authenticityToken() {
 		String uuid=java.util.UUID.randomUUID().toString();
-		String sign=Crypto.sign(uuid);
+//		String sign=Crypto.sign(uuid);
+		String sign=play.Play.application().injector().instanceOf(Crypto.class).sign(uuid);
 		Context.current().session().put(AuthenticityCheck.AUTH_TOKEN, sign);
     	return "<input type=\"hidden\" name=\"" + 
     	AuthenticityCheck.AUTH_TOKEN + "\" value=\"" + uuid + "\" />";

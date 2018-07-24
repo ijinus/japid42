@@ -15,23 +15,23 @@ public class CachedItemStatus implements Serializable{
 	private AtomicBoolean isRefreshing  = new AtomicBoolean(false);
 	private boolean expireSoon;
 
-	public CachedItemStatus(long timein, long ttl) {
+	public CachedItemStatus(long _timein, long _ttl) {
 		super();
-		this.timein = timein;
-		this.ttl = ttl;
-		long unsafeZone = (long) (ttl * (1 - RenderResultCache.SAFE_TIME_ZONE));
+		this.timein = _timein;
+		this.ttl = _ttl;
+		long unsafeZone = (long) (_ttl * (1 - RenderResultCache.SAFE_TIME_ZONE));
 		if (unsafeZone < MIN_ALERT_ADVANCE) {
 			// make a minimum 1s alert advance
-			this.safeBefore = timein + ttl - MIN_ALERT_ADVANCE;
+			this.safeBefore = _timein + _ttl - MIN_ALERT_ADVANCE;
 		}
 		else {
-			this.safeBefore = timein + ttl - unsafeZone;
+			this.safeBefore = _timein + _ttl - unsafeZone;
 		}
 			
 	}
 
-	public CachedItemStatus(long ttl) {
-		this(System.currentTimeMillis(), ttl);
+	public CachedItemStatus(long _ttl) {
+		this(System.currentTimeMillis(), _ttl);
 	}
 
 	boolean expireSoon() {

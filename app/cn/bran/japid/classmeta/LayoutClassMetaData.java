@@ -13,6 +13,8 @@
  */
 package cn.bran.japid.classmeta;
 
+import japa.parser.ast.body.Parameter;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

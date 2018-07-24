@@ -3,11 +3,13 @@
  */
 package cn.bran.play.routing;
 
+import play.mvc.Result;
+
 /**
  * @author bran
  *
  */
 
 interface ResultBuilder {
-	SimpleResult create();
+	Result create();
 }

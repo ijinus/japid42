@@ -6,7 +6,10 @@ package cn.bran.japid.rendererloader;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sun.org.apache.bcel.internal.classfile.ClassFormatException;
+import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
+import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
+import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
+import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.util.StringUtils;

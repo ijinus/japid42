@@ -76,7 +76,7 @@ import cn.bran.japid.util.WebUtils;
  * 
  */
 public final class JapidRenderer {
-	public static final String VERSION = "0.9.17.1"; // need to match that in the build.scala
+	public static final String VERSION = "0.13"; // need to match that in the build.scala
 
 	private static final String JAPIDROOT = "japidroot";
 	// private static final String RENDER_JAPID_WITH = "/renderJapidWith";
@@ -167,24 +167,24 @@ public final class JapidRenderer {
 
 	private static RendererClass getRendererClassWithoutRefresh(String name) {
 		RendererClass rc = japidClasses.get(name);
-		if (rc == null)
+		if (rc == null){
 			throw new JapidTemplateNotFoundException(name, "classpath and " + flattern(templateRoots));
-		else {
-			if (rc.getClz() == null || (playClassloaderChanged() && !rc.getContributor().startsWith("jar"))) {
-				compileAndLoad(name, rc);
-				// try {
-				// new TemplateClassLoader(parentClassLoader).loadClass(name);
-				// } catch (java.lang.NoClassDefFoundError e) {
-				// // the class presented when the class was compiled but it
-				// could not be found at runtime.
-				// // we need to recompile the class
-				// compileAndLoad(name, rc);
-				// } catch (ClassNotFoundException e) {
-				// compileAndLoad(name, rc);
-				// } catch (Exception e) {
-				// throw new RuntimeException(e);
-				// }
-			}
+		}
+		
+		if (rc.getClz() == null || (playClassloaderChanged() && !rc.getContributor().startsWith("jar"))) {
+			compileAndLoad(name, rc);
+			// try {
+			// new TemplateClassLoader(parentClassLoader).loadClass(name);
+			// } catch (java.lang.NoClassDefFoundError e) {
+			// // the class presented when the class was compiled but it
+			// could not be found at runtime.
+			// // we need to recompile the class
+			// compileAndLoad(name, rc);
+			// } catch (ClassNotFoundException e) {
+			// compileAndLoad(name, rc);
+			// } catch (Exception e) {
+			// throw new RuntimeException(e);
+			// }
 		}
 
 		return rc;
@@ -269,8 +269,8 @@ public final class JapidRenderer {
 		if (now - lastRefreshed > refreshInterval) {
 			lastRefreshed = now;
 			return true;
-		} else
-			return false;
+		}
+		return false;
 
 	}
 
@@ -536,7 +536,7 @@ public final class JapidRenderer {
 			JapidTemplateTransformer.addImportLine("play.mvc.Http.Response");
 			JapidTemplateTransformer.addImportLine("play.mvc.Http.Session");
 			JapidTemplateTransformer.addImportLine("play.mvc.Http.Flash");
-			JapidTemplateTransformer.addImportLine("play.data.validation.Validation");
+			// JapidTemplateTransformer.addImportLine("play.data.validation.Validation");
 			JapidTemplateTransformer.addImportLine("play.i18n.Lang");
 			JapidTemplateTransformer.addImportLine("play.data.Form");
 			JapidTemplateTransformer.addImportLine("play.data.Form.Field");
@@ -811,18 +811,17 @@ public final class JapidRenderer {
 				if (file.exists()) {
 					if (!file.isDirectory()) {
 						throw new RuntimeException("Japid template root exists but is not a directory: " + fullPath);
-					} else {
-						File japidviews = new File(file, JAPIDVIEWS);
-						if (!japidviews.exists()) {
-							if (!japidviews.mkdir())
-								throw new RuntimeException(
-										"Japid template prefix folder does not exist and failed to be created: "
-												+ japidviews.getAbsolutePath() + ". " + "You should create manually.");
-							else
-								JapidFlags.log("created directory: " + japidviews.getAbsolutePath());
-						} else
-							JapidFlags.log("set Japid root to: " + fullPath);
 					}
+					File japidviews = new File(file, JAPIDVIEWS);
+					if (!japidviews.exists()) {
+						if (!japidviews.mkdir()){
+							throw new RuntimeException(
+									"Japid template prefix folder does not exist and failed to be created: "
+											+ japidviews.getAbsolutePath() + ". " + "You should create manually.");
+						}
+						JapidFlags.log("created directory: " + japidviews.getAbsolutePath());
+					} else
+						JapidFlags.log("set Japid root to: " + fullPath);
 				} else {
 					JapidFlags.warn("root directory does not exist: " + fullPath);
 				}
@@ -981,7 +980,7 @@ public final class JapidRenderer {
 			if (usePlay) {
 				t.addImport("controllers.*");
 				t.addImport("models.*");
-				t.addImport("play.data.validation.Validation");
+				// t.addImport("play.data.validation.Validation");
 				t.addImport("play.i18n.Lang");
 				t.addImport("play.mvc.Http.Context.Implicit");
 				t.addImport("play.mvc.Http.Flash");
@@ -1147,7 +1146,7 @@ public final class JapidRenderer {
 	/**
 	 * The <em>required</em> initialization step in using the JapidRender.
 	 * 
-	 * @param opMode
+	 * @param _opMode
 	 *            the operational mode of Japid. When set to OpMode.prod, it's
 	 *            assumed that all Java derivatives are already been generated
 	 *            and used directly. When set to OpMode.dev, and using
@@ -1157,14 +1156,14 @@ public final class JapidRenderer {
 	 *            compiled and new classes are loaded to serve the request.
 	 * @param templateRoot
 	 *            the root directory to contain the "japidviews" directory tree.
-	 * @param refreshInterval
+	 * @param _refreshInterval
 	 *            the minimal time, in second, that must elapse before trying to
 	 *            detect any changes in the file system.
 	 * @param app
 	 *            the Play application instance
 	 * @throws IOException
 	 */
-	public static void init(OpMode opMode, String[] templateRoot, int refreshInterval, Map<String, Object> app,
+	public static void init(OpMode _opMode, String[] templateRoot, int _refreshInterval, Map<String, Object> app,
 			ClassLoader clr) throws IOException {
 		specialClasses.clear();
 		showCurrentDirectory();
@@ -1174,10 +1173,10 @@ public final class JapidRenderer {
 		japidResourceCompiled = false;
 
 		inited = true;
-		JapidRenderer.opMode = opMode == null ? OpMode.dev : opMode;
+		JapidRenderer.opMode = _opMode == null ? OpMode.dev : _opMode;
 		if (!rootsSet)
 			setTemplateRoot(templateRoot);
-		setRefreshInterval(refreshInterval);
+		setRefreshInterval(_refreshInterval);
 
 		boolean yesno = false;
 
@@ -1212,7 +1211,7 @@ public final class JapidRenderer {
 		// if (usePlay)
 		// initErrorRenderer();
 		touch();
-		if (opMode == OpMode.dev)
+		if (_opMode == OpMode.dev)
 			recoverClasses();
 		dynamicClasses.clear();
 
@@ -1244,7 +1243,7 @@ public final class JapidRenderer {
 			JapidTemplateTransformer.addImportLine("play.mvc.Http.Response");
 			JapidTemplateTransformer.addImportLine("play.mvc.Http.Session");
 			JapidTemplateTransformer.addImportLine("play.mvc.Http.Flash");
-			JapidTemplateTransformer.addImportLine("play.data.validation.Validation");
+			// JapidTemplateTransformer.addImportLine("play.data.validation.Validation");
 			JapidTemplateTransformer.addImportLine("play.i18n.Lang");
 		}
 	}
@@ -1425,7 +1424,8 @@ public final class JapidRenderer {
 	 * @return returns the key, which is prefixed with "japidviews." if it was
 	 *         not so
 	 */
-	public static String registerTemplate(MimeTypeEnum mimeType, String source, String key) {
+	public static String registerTemplate(MimeTypeEnum mimeType, String source, String _key) {
+		String key = _key;
 		refreshClasses();
 
 		if (!key.startsWith(JAPIDVIEWS)) {
@@ -1485,7 +1485,6 @@ public final class JapidRenderer {
 				oos.writeObject(VERSION);
 				oos.writeObject(japidClasses);
 				oos.writeObject(resourceJars);
-				oos.writeObject(JapidFlags.getVersionCheckedDirs());
 				JapidFlags.debug("japid template classes cached on disk.");
 				oos.close();
 			} catch (Exception e) {
@@ -1527,13 +1526,15 @@ public final class JapidRenderer {
 	 * @param args
 	 * @return
 	 */
-	public static RenderResult renderWith(String template, Object... args) {
+	public static RenderResult renderWith(String _template, Object... _args) {
+		Object[] args = _args;
+		String template = _template;
 		if (args == null)
 			args = new Object[0];
 		if (template == null || template.length() == 0) {
 			throw new RuntimeException("JapidRenderer: template name cannot be empty.");
 		}
-
+		
 		// template = StringUtils.removeEnding(template, HTML);
 
 		template = DirUtil.deriveClassName(template);
@@ -1552,13 +1553,12 @@ public final class JapidRenderer {
 		if (tClass == null) {
 			throw new RuntimeException("Could not find a Japid template with the name: "
 					+ (templateClassName.replace('.', '/') + HTML));
-		} else {
-			try {
-				return RenderInvokerUtils.invokeRender(tClass, args);
-			} catch (Throwable t) {
-				RenderResult er = handleException(t);
-				return er;
-			}
+		}
+		try {
+			return RenderInvokerUtils.invokeRender(tClass, args);
+		} catch (Throwable t) {
+			RenderResult er = handleException(t);
+			return er;
 		}
 	}
 
@@ -1581,13 +1581,12 @@ public final class JapidRenderer {
 		if (tClass == null) {
 			String templateFileName = templateClassName.replace('.', '/') + HTML;
 			throw new RuntimeException("Could not find a Japid template with the name of: " + templateFileName);
-		} else {
-			try {
-				return RenderInvokerUtils.invokeNamedArgsRender(tClass, args);
-			} catch (Throwable e) {
-				RenderResult er = handleException(e);
-				return er;
-			}
+		}
+		try {
+			return RenderInvokerUtils.invokeNamedArgsRender(tClass, args);
+		} catch (Throwable e) {
+			RenderResult er = handleException(e);
+			return er;
 		}
 	}
 
@@ -1633,16 +1632,18 @@ public final class JapidRenderer {
 	 * @param appPath
 	 *            the appPath to set
 	 */
-	public static void setAppPath(String appPath) {
-		JapidRenderer.appPath = appPath;
+	public static void setAppPath(String _appPath) {
+		JapidRenderer.appPath = _appPath;
 	}
 
-	public static RenderResult handleException(Throwable e) throws RuntimeException {
-		if (!presentErrorInHtml)
-			if (e instanceof RuntimeException)
+	public static RenderResult handleException(Throwable _e) throws RuntimeException {
+		Throwable e = _e;
+		if (!presentErrorInHtml) {
+			if (e instanceof RuntimeException){
 				throw (RuntimeException) e;
-			else
-				throw new RuntimeException(e);
+			}
+			throw new RuntimeException(e);
+		}
 
 		// if (Play.mode == Mode.PROD)
 		// throw new RuntimeException(e);
@@ -1689,10 +1690,10 @@ public final class JapidRenderer {
 					}
 				}
 			} else if (className.startsWith("controllers.")) {
-				if (e instanceof RuntimeException)
+				if (e instanceof RuntimeException){
 					throw (RuntimeException) e;
-				else
-					throw new RuntimeException(e);
+				}
+				throw new RuntimeException(e);
 			}
 		}
 
@@ -1713,11 +1714,11 @@ public final class JapidRenderer {
 	}
 
 	/**
-	 * @param presentErrorInHtml
+	 * @param _presentErrorInHtml
 	 *            the presentErrorInHtml to set
 	 */
-	public static void setPresentErrorInHtml(boolean presentErrorInHtml) {
-		JapidRenderer.presentErrorInHtml = presentErrorInHtml;
+	public static void setPresentErrorInHtml(boolean _presentErrorInHtml) {
+		JapidRenderer.presentErrorInHtml = _presentErrorInHtml;
 	}
 
 	public static void shutdown() {
@@ -1735,11 +1736,11 @@ public final class JapidRenderer {
 	/**
 	 * controls if Just-In-Time persisting of the Japid classes is enabled.
 	 * 
-	 * @param enableJITCachePersistence
+	 * @param _enableJITCachePersistence
 	 *            the enableJITCachePersistence to set
 	 */
-	public static void setEnableJITCachePersistence(boolean enableJITCachePersistence) {
-		JapidRenderer.enableJITCachePersistence = enableJITCachePersistence;
+	public static void setEnableJITCachePersistence(boolean _enableJITCachePersistence) {
+		JapidRenderer.enableJITCachePersistence = _enableJITCachePersistence;
 	}
 
 	/**
@@ -1755,20 +1756,19 @@ public final class JapidRenderer {
 	 * @return the classCacheRoot
 	 */
 	public static String getClassCacheRoot() {
-		if (classCacheRoot != null)
+		if (classCacheRoot != null){
 			return classCacheRoot;
-		else {
-			String[] r = getTemplateRoot();
-			return r != null ? r[0] : "japidroot";
 		}
+		String[] r = getTemplateRoot();
+		return r != null ? r[0] : "japidroot";
 	}
 
 	/**
 	 * @param classCacheRoot
 	 *            the classCacheRoot to set
 	 */
-	public static void setClassCacheRoot(String classCacheRoot) {
-		JapidRenderer.classCacheRoot = classCacheRoot;
+	public static void setClassCacheRoot(String _classCacheRoot) {
+		JapidRenderer.classCacheRoot = _classCacheRoot;
 	}
 
 	// scan classpath for japid scripts
@@ -1834,12 +1834,11 @@ public final class JapidRenderer {
 			File rf = it.next();
 			if (rf.getAbsolutePath().equals(f.getAbsolutePath())) {
 				// how about time stamp
-				if (rf.lastModified() == f.lastModified())
+				if (rf.lastModified() == f.lastModified()){
 					return true;
-				else {
-					it.remove();
-					return false;
 				}
+				it.remove();
+				return false;
 			}
 		}
 		return false;
@@ -1852,10 +1851,10 @@ public final class JapidRenderer {
 	 */
 	private static boolean shouldIgnore(String k) {
 		if (!k.endsWith(".html") && !k.endsWith(".txt") && !k.endsWith(".xml") && !k.endsWith(".json")
-				&& !k.endsWith(".css") && !k.endsWith(".js"))
+				&& !k.endsWith(".css") && !k.endsWith(".js")){
 			return true;
-		else
-			return false;
+		}
+		return false;
 	}
 
 	// compile japid script to Java code from an inputstream
@@ -1919,10 +1918,10 @@ public final class JapidRenderer {
 		String templateClassName = JapidRenderer.getTemplateClassName(template);
 		try {
 			Class<? extends JapidTemplateBaseWithoutPlay> c = getClass(templateClassName);
-			if (c == null)
+			if (c == null){
 				return false;
-			else
-				return true;
+			}
+			return true;
 		} catch (JapidTemplateNotFoundException e) {
 			return false;
 		}

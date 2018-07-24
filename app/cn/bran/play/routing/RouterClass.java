@@ -3,6 +3,10 @@
  */
 package cn.bran.play.routing;
 
+import static org.reflections.ReflectionUtils.getAllMethods;
+import static org.reflections.ReflectionUtils.withModifier;
+import static org.reflections.ReflectionUtils.withReturnType;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -10,8 +14,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import javax.ws.rs.Path;
+
+import play.libs.F.Tuple;
+import play.mvc.Result;
+
 import cn.bran.japid.util.JapidFlags;
 import cn.bran.play.GlobalSettingsWithJapid;
+
+import com.google.common.base.Predicates;
 
 /**
  * @author bran

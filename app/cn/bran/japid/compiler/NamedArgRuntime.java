@@ -1,5 +1,6 @@
 package cn.bran.japid.compiler;
 
+
 /**
  * a = "asd", b = 12, etc
  * 
@@ -7,9 +8,9 @@ package cn.bran.japid.compiler;
  *
  */
 public class NamedArgRuntime {
-	public NamedArgRuntime(String name, Object val) {
-		this.name = name;
-		this.val = val;
+	public NamedArgRuntime(String _name, Object _val) {
+		this.name = _name;
+		this.val = _val;
 	}
 	public String name;
 	public Object val;

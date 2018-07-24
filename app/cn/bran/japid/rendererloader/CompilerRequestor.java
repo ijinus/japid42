@@ -6,7 +6,11 @@ package cn.bran.japid.rendererloader;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import com.sun.org.apache.bcel.internal.util.ClassPath.ClassFile;
+import org.eclipse.jdt.core.compiler.CategorizedProblem;
+import org.eclipse.jdt.core.compiler.IProblem;
+import org.eclipse.jdt.internal.compiler.ClassFile;
+import org.eclipse.jdt.internal.compiler.CompilationResult;
+import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
 
 import cn.bran.japid.exceptions.JapidTemplateException;
 import cn.bran.japid.template.JapidRenderer;

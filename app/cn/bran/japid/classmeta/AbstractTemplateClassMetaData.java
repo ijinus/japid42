@@ -14,6 +14,8 @@
 
 package cn.bran.japid.classmeta;
 
+import japa.parser.ast.body.Parameter;
+
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,8 +70,8 @@ public abstract class AbstractTemplateClassMetaData {
 		return this.originalTemplate;
 	}
 
-	public void setOriginalTemplate(String originalTemplate) {
-		this.originalTemplate = originalTemplate.replace('\\', '/');
+	public void setOriginalTemplate(String _originalTemplate) {
+		this.originalTemplate = _originalTemplate.replace('\\', '/');
 	}
 
 	public StringBuilder sb = new StringBuilder();
@@ -95,8 +97,8 @@ public abstract class AbstractTemplateClassMetaData {
 		return this.className;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setClassName(String _className) {
+		this.className = _className;
 	}
 
 	// each line: byte[] _lineXXX=new byte[]{12, 23, 45};
@@ -131,10 +133,10 @@ public abstract class AbstractTemplateClassMetaData {
 		this.sb.append(s);
 	}
 
-	public InnerClassMeta addCallTagBodyInnerClass(String className, int count, String callbackArgs, String body) {
-		if (specialTags.contains(className))
+	public InnerClassMeta addCallTagBodyInnerClass(String _className, int count, String callbackArgs, String _body) {
+		if (specialTags.contains(_className))
 			return null;
-		InnerClassMeta inner = new InnerClassMeta(className, count, callbackArgs, body);
+		InnerClassMeta inner = new InnerClassMeta(_className, count, callbackArgs, _body);
 		this.innersforTagCalls.add(inner);
 		return inner;
 	}
@@ -247,7 +249,8 @@ public abstract class AbstractTemplateClassMetaData {
 		pln (v);
 	}
 
-	private boolean considerPlayDependency(String l) {
+	private boolean considerPlayDependency(String la) {
+		String l = la;
 		if (this.useWithPlay)
 			return true;
 
@@ -286,7 +289,8 @@ public abstract class AbstractTemplateClassMetaData {
 	 *            a partially specified import line such as: import .tags.*;
 	 * @return
 	 */
-	public String expandPartialImport(String l) {
+	public String expandPartialImport(String la) {
+		String l = la;
 		Matcher matcher = partialImport.matcher(l);
 		if (matcher.matches()) {
 			l = "import " + this.packageName + "." + matcher.group(1);
@@ -369,7 +373,8 @@ public abstract class AbstractTemplateClassMetaData {
 	 * 
 	 * @param imp
 	 */
-	public static void addImportLineGlobal(String imp) {
+	public static void addImportLineGlobal(String _imp) {
+		String imp = _imp;
 		imp = imp.trim();
 		if (imp.startsWith(IMPORT)) {
 			imp = imp.substring(IMPORT.length()).trim();
@@ -441,8 +446,8 @@ public abstract class AbstractTemplateClassMetaData {
 	 * 
 	 * @param isAbstract
 	 */
-	public void setAbstract(boolean isAbstract) {
-		this.isAbstract = isAbstract;
+	public void setAbstract(boolean _isAbstract) {
+		this.isAbstract = _isAbstract;
 	}
 
 	public String superClass;
@@ -457,7 +462,8 @@ public abstract class AbstractTemplateClassMetaData {
 	 * 
 	 * @param imp
 	 */
-	public static void addImportStaticGlobal(String imp) {
+	public static void addImportStaticGlobal(String _imp) {
+		String imp = _imp;
 		if (imp.startsWith(IMPORT))
 			imp = imp.substring(IMPORT.length()).trim();
 
@@ -468,8 +474,8 @@ public abstract class AbstractTemplateClassMetaData {
 	}
 
 	public void addImport(Class<?> class1) {
-		String className = class1.getName();
-		addImportLine(className);
+		String _className = class1.getName();
+		addImportLine(_className);
 	}
 
 	private static Set<String> globalImports = new HashSet<String>();
@@ -508,10 +514,10 @@ public abstract class AbstractTemplateClassMetaData {
 
 	static Set<Class<? extends Annotation>> typeAnnotations = new HashSet<Class<? extends Annotation>>();
 
-	public void setContentType(String contentType) {
-		if (contentType != null) {
-			this.headers.put(CONTENT_TYPE, contentType);
-			this.contentType = contentType;
+	public void setContentType(String _contentType) {
+		if (_contentType != null) {
+			this.headers.put(CONTENT_TYPE, _contentType);
+			this.contentType = _contentType;
 		}
 	}
 

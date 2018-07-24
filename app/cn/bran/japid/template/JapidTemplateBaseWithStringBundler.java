@@ -25,12 +25,12 @@ public abstract class JapidTemplateBaseWithStringBundler {
 		return this.actionRunners;
 	}
 
-	public void setActionRunners(TreeMap<Integer, cn.bran.japid.template.ActionRunner> actionRunners) {
-		this.actionRunners = actionRunners;
+	public void setActionRunners(TreeMap<Integer, cn.bran.japid.template.ActionRunner> _actionRunners) {
+		this.actionRunners = _actionRunners;
 	}
 
-	public void setOut(StringBundler out) {
-		this.out = out;
+	public void setOut(StringBundler _out) {
+		this.out = _out;
 	}
 
 	protected StringBundler getOut() {

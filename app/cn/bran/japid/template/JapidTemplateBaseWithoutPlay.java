@@ -78,8 +78,8 @@ public abstract class JapidTemplateBaseWithoutPlay implements Serializable {
 			this.out = new StringBuilder(4000);
 	}
 
-	public void setOut(StringBuilder out) {
-		this.out = out;
+	public void setOut(StringBuilder _out) {
+		this.out = _out;
 	}
 
 	protected StringBuilder getOut() {
@@ -103,14 +103,14 @@ public abstract class JapidTemplateBaseWithoutPlay implements Serializable {
 		init();
 	}
 
-	public JapidTemplateBaseWithoutPlay(JapidTemplateBaseWithoutPlay caller) {
-		if (caller != null) {
-			this.out = caller.getOut();
+	public JapidTemplateBaseWithoutPlay(JapidTemplateBaseWithoutPlay _caller) {
+		if (_caller != null) {
+			this.out = _caller.getOut();
 		}
-		this.caller = caller;
-		this.timeLogs = caller.timeLogs;
-		this.headers = caller.getHeaders();
-		this.stopwatch = caller.stopwatch;
+		this.caller = _caller;
+		this.timeLogs = _caller.timeLogs;
+		this.headers = _caller.getHeaders();
+		this.stopwatch = _caller.stopwatch;
 		init();
 	}
 
@@ -600,20 +600,20 @@ public abstract class JapidTemplateBaseWithoutPlay implements Serializable {
 	}
 
 	/**
-	 * @param contentType
+	 * @param _contentType
 	 *            the contentType to set
 	 */
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-		if (contentType.contains("xml"))
+	public void setContentType(String _contentType) {
+		this.contentType = _contentType;
+		if (_contentType.contains("xml"))
 			this.mimeType = MimeTypeEnum.xml;
-		else if (contentType.contains("html"))
+		else if (_contentType.contains("html"))
 			this.mimeType = MimeTypeEnum.html;
-		else if (contentType.contains("javascript"))
+		else if (_contentType.contains("javascript"))
 			this.mimeType = MimeTypeEnum.js;
-		else if (contentType.contains("json"))
+		else if (_contentType.contains("json"))
 			this.mimeType = MimeTypeEnum.json;
-		else if (contentType.contains("css"))
+		else if (_contentType.contains("css"))
 			this.mimeType = MimeTypeEnum.css;
 	}
 
@@ -625,17 +625,16 @@ public abstract class JapidTemplateBaseWithoutPlay implements Serializable {
 	}
 
 	/**
-	 * @param traceFile
+	 * @param _traceFile
 	 *            the traceFile to set
 	 */
-	public void setTraceFile(Boolean traceFile) {
-		this.traceFile = traceFile;
+	public void setTraceFile(Boolean _traceFile) {
+		this.traceFile = _traceFile;
 	}
 
 	/**
 	 * @deprecated the Each tag is deprecated in favor of using native loop
 	 */
-	@Deprecated
 	protected void breakLoop() {
 		throw new BreakLoop();
 	}
@@ -643,7 +642,6 @@ public abstract class JapidTemplateBaseWithoutPlay implements Serializable {
 	/**
 	 * @deprecated the Each tag is deprecated in favor of using native loop
 	 */
-	@Deprecated
 	protected void continueLoop() {
 		throw new ContinueLoop();
 	}

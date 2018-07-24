@@ -275,7 +275,8 @@ public class JapidDateFormat extends Format {
      * @throws IllegalArgumentException if the Locale has no date
      *  pattern defined
      */
-    public static synchronized JapidDateFormat getDateInstance(int style, TimeZone timeZone, Locale locale) {
+    public static synchronized JapidDateFormat getDateInstance(int style, TimeZone timeZone, Locale _locale) {
+    	Locale locale = _locale;
         Object key = new Integer(style);
         if (timeZone != null) {
             key = new Pair(key, timeZone);
@@ -360,7 +361,8 @@ public class JapidDateFormat extends Format {
      * @throws IllegalArgumentException if the Locale has no time
      *  pattern defined
      */
-    public static synchronized JapidDateFormat getTimeInstance(int style, TimeZone timeZone, Locale locale) {
+    public static synchronized JapidDateFormat getTimeInstance(int style, TimeZone timeZone, Locale _locale) {
+    	Locale locale = _locale;
         Object key = new Integer(style);
         if (timeZone != null) {
             key = new Pair(key, timeZone);
@@ -453,8 +455,8 @@ public class JapidDateFormat extends Format {
      *  pattern defined
      */
     public static synchronized JapidDateFormat getDateTimeInstance(int dateStyle, int timeStyle, TimeZone timeZone,
-            Locale locale) {
-
+            Locale _locale) {
+    	Locale locale = _locale;
         Object key = new Pair(new Integer(dateStyle), new Integer(timeStyle));
         if (timeZone != null) {
             key = new Pair(key, timeZone);
@@ -529,8 +531,10 @@ public class JapidDateFormat extends Format {
      * @throws IllegalArgumentException if pattern is invalid or
      *  <code>null</code>
      */
-    protected JapidDateFormat(String pattern, TimeZone timeZone, Locale locale) {
+    protected JapidDateFormat(String pattern, TimeZone _timeZone, Locale _locale) {
         super();
+    	TimeZone timeZone = _timeZone;
+    	Locale locale = _locale;
         if (pattern == null) {
             throw new IllegalArgumentException("The pattern must not be null");
         }
@@ -865,7 +869,8 @@ public class JapidDateFormat extends Format {
      * @param buf  the buffer to format into
      * @return the specified string buffer
      */
-    public StringBuffer format(Calendar calendar, StringBuffer buf) {
+    public StringBuffer format(Calendar _calendar, StringBuffer buf) {
+    	Calendar calendar = _calendar;
         if (this.mTimeZoneForced) {
             calendar = (Calendar) calendar.clone();
             calendar.setTimeZone(this.mTimeZone);
@@ -1694,8 +1699,8 @@ public class JapidDateFormat extends Format {
          * @param style the timezone style
          * @param locale the timezone locale
          */
-        TimeZoneDisplayKey(TimeZone timeZone,
-                           boolean daylight, int style, Locale locale) {
+        TimeZoneDisplayKey(TimeZone timeZone, boolean daylight, int _style, Locale locale) {
+        	int style = _style;
             this.mTimeZone = timeZone;
             if (daylight) {
                 style |= 0x80000000;

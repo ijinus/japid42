@@ -66,8 +66,8 @@ public class TranslateTemplateTask {
 //		return usePlay;
 //	}
 
-	public void setUsePlay(boolean usePlay) {
-		this.usePlay = usePlay;
+	public void setUsePlay(boolean _usePlay) {
+		this.usePlay = _usePlay;
 	}
 
 	/**
@@ -278,7 +278,7 @@ public class TranslateTemplateTask {
 	/**
 	 * @param changedFiles the changedFiles to set. Each file starts with the package root. 
 	 */
-	public void setChangedFiles(List<File> changedFiles) {
-		this.changedFiles = changedFiles;
+	public void setChangedFiles(List<File> _changedFiles) {
+		this.changedFiles = _changedFiles;
 	}
 }

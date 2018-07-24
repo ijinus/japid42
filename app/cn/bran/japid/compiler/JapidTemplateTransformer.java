@@ -42,22 +42,22 @@ public class JapidTemplateTransformer {
 	// private UrlMapper urlMapper;
 
 	/**
-	 * @param sourceFolder
+	 * @param _sourceFolder
 	 *            the folder containing the template source tree. It's the same
 	 *            concept as in eclipse. The root package for Java artifacts are
 	 *            the direct children of this
-	 * @param targetFolder
+	 * @param _targetFolder
 	 *            the "source folder", in Eclipse term, that the generated Java
 	 *            artifacts will be placed. If it is null, the Java files will
 	 *            be placed in the sourceFolder.
 	 */
-	public JapidTemplateTransformer(String sourceFolder, String targetFolder) {
+	public JapidTemplateTransformer(String _sourceFolder, String _targetFolder) {
 		super();
 
-		this.sourceFolder = sourceFolder;
+		this.sourceFolder = _sourceFolder;
 		// this.messageProvider = messageProvider;
 		// this.urlMapper = urlMapper;
-		this.targetFolder = targetFolder;
+		this.targetFolder = _targetFolder;
 		//		
 		// BranTemplateBase.messageProvider = messageProvider;
 		// BranTemplateBase.urlMapper = urlMapper;

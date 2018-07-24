@@ -13,6 +13,8 @@
  */
 package cn.bran.japid.classmeta;
 
+import japa.parser.ast.body.Parameter;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +70,8 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 		this.doBodyArgsString = bodyArgsString;
 	}
 
-	public void doBody(String tagArgs) {
+	public void doBody(String _tagArgs) {
+		String tagArgs = _tagArgs;
 		tagArgs = tagArgs == null ? "" : tagArgs.trim();
 		this.addDoBodyInterface(tagArgs);
 	}
@@ -254,12 +257,12 @@ public class TemplateClassMetaData extends AbstractTemplateClassMetaData {
 			pln("		void setBuffer(StringBuilder sb);\n" + "		void resetBuffer();\n" + "}");
 
 			// add a convenient method to get the render result from the doBody object
-			String renderArgs = renderArgList.replaceAll("[A-Z]", "");
+			String _renderArgs = renderArgList.replaceAll("[A-Z]", "");
 			pln(genericTypeList, " String renderBody(" + renderArgList + ") {\n" + 
 					"		StringBuilder sb = new StringBuilder();\n" + 
 					"		if (body != null){\n" + 
 					"			body.setBuffer(sb);\n" + 
-					"			body.render(" + renderArgs + ");\n" + 
+					"			body.render(" + _renderArgs + ");\n" + 
 					"			body.resetBuffer();\n" + 
 					"		}\n" + 
 					"		return sb.toString();\n" + 

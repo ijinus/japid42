@@ -11,7 +11,6 @@ import cn.bran.japid.util.StringUtils;
  * @author Bing Ran<bing_ran@hotmail.com>
  * @deprecated not used
  */
-@Deprecated
 public class JapidModelMap {
 	Map<String, Object> map = new HashMap<String, Object>();
 	

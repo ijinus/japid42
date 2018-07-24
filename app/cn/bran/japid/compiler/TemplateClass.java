@@ -2,6 +2,10 @@ package cn.bran.japid.compiler;
 
 import java.util.List;
 
+import japa.parser.ParseException;
+import japa.parser.ast.CompilationUnit;
+import japa.parser.ast.body.TypeDeclaration;
+
 /**
  * Wrap the compilation unit from the generated class. For use in testing.
  * 

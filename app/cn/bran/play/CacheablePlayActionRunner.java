@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 
+import play.cache.Cached;
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.template.RenderResult;
 
@@ -30,7 +31,6 @@ public abstract class CacheablePlayActionRunner extends CacheableRunner {
 	 * @param args
 	 * @deprecated use the other constructor that allow for better integration with CacheFor annotation
 	 */
-	@Deprecated
 	public CacheablePlayActionRunner(String ttl, Object... args) {
 		super(ttl, args);
 //		if (args != null && args.length > 0) {
@@ -39,10 +39,10 @@ public abstract class CacheablePlayActionRunner extends CacheableRunner {
 //		}
 	}
 	
-	public CacheablePlayActionRunner(String ttl, Class<? extends JapidController> controllerClass, String actionName, Object... args) {
-		this.controllerClass = controllerClass;
-		this.actionName = actionName;
-		Object[] fullArgs = buildCacheKeyParts(controllerClass, actionName, args);
+	public CacheablePlayActionRunner(String ttl, Class<? extends JapidController> _controllerClass, String _actionName, Object... args) {
+		this.controllerClass = _controllerClass;
+		this.actionName = _actionName;
+		Object[] fullArgs = buildCacheKeyParts(_controllerClass, _actionName, args);
 		super.init(ttl, fullArgs);
 		
 		//		Object[] fullArgs = new Object[args.length + 2];
@@ -135,17 +135,17 @@ public abstract class CacheablePlayActionRunner extends CacheableRunner {
 
 	/**
 	 * @param class1
-	 * @param actionName
+	 * @param _actionName
 	 */
-	private void fillCacheFor(Class<? extends JapidController> class1, String actionName) {
+	private void fillCacheFor(Class<? extends JapidController> class1, String _actionName) {
 		String className = class1.getName();
-		String cacheForKey = className + "_" + actionName;
+		String cacheForKey = className + "_" + _actionName;
 		Integer cacheForVal = (Integer) JapidRenderer.getCache().get(cacheForKey);
 		if (cacheForVal == null) {
 			// the cache has not been filled up yet.
 			Method[] mths = class1.getDeclaredMethods();
 			for (Method m : mths) {
-				if (m.getName().equalsIgnoreCase(actionName) && Modifier.isPublic(m.getModifiers())) {
+				if (m.getName().equalsIgnoreCase(_actionName) && Modifier.isPublic(m.getModifiers())) {
 						Cached cacheFor = m.getAnnotation(Cached.class);
 						if (cacheFor == null) {
 							// well no annotation level cache spec

@@ -1,5 +1,97 @@
 package cn.bran.japid.compiler;
 
+import japa.parser.JavaParser;
+import japa.parser.ParseException;
+import japa.parser.TokenMgrError;
+import japa.parser.ast.comments.BlockComment;
+import japa.parser.ast.CompilationUnit;
+import japa.parser.ast.ImportDeclaration;
+import japa.parser.ast.comments.LineComment;
+import japa.parser.ast.Node;
+import japa.parser.ast.PackageDeclaration;
+import japa.parser.ast.TypeParameter;
+import japa.parser.ast.body.AnnotationDeclaration;
+import japa.parser.ast.body.AnnotationMemberDeclaration;
+import japa.parser.ast.body.ClassOrInterfaceDeclaration;
+import japa.parser.ast.body.ConstructorDeclaration;
+import japa.parser.ast.body.EmptyMemberDeclaration;
+import japa.parser.ast.body.EmptyTypeDeclaration;
+import japa.parser.ast.body.EnumConstantDeclaration;
+import japa.parser.ast.body.EnumDeclaration;
+import japa.parser.ast.body.FieldDeclaration;
+import japa.parser.ast.body.InitializerDeclaration;
+import japa.parser.ast.comments.JavadocComment;
+import japa.parser.ast.body.MethodDeclaration;
+import japa.parser.ast.body.ModifierSet;
+import japa.parser.ast.body.Parameter;
+import japa.parser.ast.body.VariableDeclarator;
+import japa.parser.ast.body.VariableDeclaratorId;
+import japa.parser.ast.expr.AnnotationExpr;
+import japa.parser.ast.expr.ArrayAccessExpr;
+import japa.parser.ast.expr.ArrayCreationExpr;
+import japa.parser.ast.expr.ArrayInitializerExpr;
+import japa.parser.ast.expr.AssignExpr;
+import japa.parser.ast.expr.BinaryExpr;
+import japa.parser.ast.expr.BinaryExpr.Operator;
+import japa.parser.ast.expr.BooleanLiteralExpr;
+import japa.parser.ast.expr.CastExpr;
+import japa.parser.ast.expr.CharLiteralExpr;
+import japa.parser.ast.expr.ClassExpr;
+import japa.parser.ast.expr.ConditionalExpr;
+import japa.parser.ast.expr.DoubleLiteralExpr;
+import japa.parser.ast.expr.EnclosedExpr;
+import japa.parser.ast.expr.Expression;
+import japa.parser.ast.expr.FieldAccessExpr;
+import japa.parser.ast.expr.InstanceOfExpr;
+import japa.parser.ast.expr.IntegerLiteralExpr;
+import japa.parser.ast.expr.IntegerLiteralMinValueExpr;
+import japa.parser.ast.expr.LongLiteralExpr;
+import japa.parser.ast.expr.LongLiteralMinValueExpr;
+import japa.parser.ast.expr.MarkerAnnotationExpr;
+import japa.parser.ast.expr.MemberValuePair;
+import japa.parser.ast.expr.MethodCallExpr;
+import japa.parser.ast.expr.NameExpr;
+import japa.parser.ast.expr.NormalAnnotationExpr;
+import japa.parser.ast.expr.NullLiteralExpr;
+import japa.parser.ast.expr.ObjectCreationExpr;
+import japa.parser.ast.expr.QualifiedNameExpr;
+import japa.parser.ast.expr.SingleMemberAnnotationExpr;
+import japa.parser.ast.expr.StringLiteralExpr;
+import japa.parser.ast.expr.SuperExpr;
+import japa.parser.ast.expr.ThisExpr;
+import japa.parser.ast.expr.UnaryExpr;
+import japa.parser.ast.expr.VariableDeclarationExpr;
+import japa.parser.ast.stmt.AssertStmt;
+import japa.parser.ast.stmt.BlockStmt;
+import japa.parser.ast.stmt.BreakStmt;
+import japa.parser.ast.stmt.CatchClause;
+import japa.parser.ast.stmt.ContinueStmt;
+import japa.parser.ast.stmt.DoStmt;
+import japa.parser.ast.stmt.EmptyStmt;
+import japa.parser.ast.stmt.ExplicitConstructorInvocationStmt;
+import japa.parser.ast.stmt.ExpressionStmt;
+import japa.parser.ast.stmt.ForStmt;
+import japa.parser.ast.stmt.ForeachStmt;
+import japa.parser.ast.stmt.IfStmt;
+import japa.parser.ast.stmt.LabeledStmt;
+import japa.parser.ast.stmt.ReturnStmt;
+import japa.parser.ast.stmt.SwitchEntryStmt;
+import japa.parser.ast.stmt.SwitchStmt;
+import japa.parser.ast.stmt.SynchronizedStmt;
+import japa.parser.ast.stmt.ThrowStmt;
+import japa.parser.ast.stmt.TryStmt;
+import japa.parser.ast.stmt.TypeDeclarationStmt;
+import japa.parser.ast.stmt.WhileStmt;
+import japa.parser.ast.type.ClassOrInterfaceType;
+import japa.parser.ast.type.PrimitiveType;
+import japa.parser.ast.type.ReferenceType;
+import japa.parser.ast.type.Type;
+import japa.parser.ast.type.VoidType;
+import japa.parser.ast.type.WildcardType;
+import japa.parser.ast.visitor.GenericVisitor;
+import japa.parser.ast.visitor.VoidVisitor;
+import japa.parser.ast.visitor.VoidVisitorAdapter;
+
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -7,10 +99,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.lang.model.type.PrimitiveType;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.VoidType;
 
 public class JavaSyntaxTool {
 	private static final String UTF_8 = "UTF-8";
@@ -69,13 +157,12 @@ public class JavaSyntaxTool {
 	 * @author Bing Ran<bing_ran@hotmail.com>
 	 * @deprecated use the original Parameter for complete control
 	 */
-	@Deprecated
 	public static class Param {
 		public String type, name;
 
-		public Param(String type, String name) {
-			this.type = type;
-			this.name = name;
+		public Param(String _type, String _name) {
+			this.type = _type;
+			this.name = _name;
 		}
 	}
 
@@ -90,7 +177,8 @@ public class JavaSyntaxTool {
 	 * @param line
 	 * @return
 	 */
-	public static List<Parameter> parseParams(String line) {
+	public static List<Parameter> parseParams(String _line) {
+		String line = _line;
 		final List<Parameter> ret = new ArrayList<Parameter>();
 		if (line == null || line.trim().length() == 0)
 			return ret;
@@ -121,7 +209,8 @@ public class JavaSyntaxTool {
 	// XXX this method does not properly parse thingsl like A<t> a
 	// it does not detect the error
 	@SuppressWarnings("unchecked")
-	public static List<String> parseArgs(String line) {
+	public static List<String> parseArgs(String _line) {
+		String line = _line;
 		final List<String> ret = new ArrayList<String>();
 		if (line == null || line.trim().length() == 0)
 			return ret;
@@ -172,7 +261,8 @@ public class JavaSyntaxTool {
 	 *         or named and un-named are mixed
 	 * 
 	 */
-	public static List<NamedArg> parseNamedArgs(String line) {
+	public static List<NamedArg> parseNamedArgs(String _line) {
+		String line = _line;
 		final List<NamedArg> ret = new ArrayList<NamedArg>();
 		if (line == null || line.trim().length() == 0)
 			return ret;
@@ -248,9 +338,8 @@ public class JavaSyntaxTool {
 				if (string.equals(n.getName())) {
 					re.append(1);
 					return;
-				} else {
-					super.visit(n, arg);
 				}
+				super.visit(n, arg);
 			}
 		};
 		cu.accept(visitor, null);
@@ -280,9 +369,9 @@ public class JavaSyntaxTool {
 	}
 
 	public static boolean hasMethod(CompilationUnit cu, final String name,
-			final int modis, final String returnType, String paramList) {
+			final int modis, final String returnType, String _paramList) {
 		final StringBuilder sb = new StringBuilder();
-
+		String paramList = _paramList;
 		if (paramList == null)
 			paramList = "";
 		String formalParamList = addParamNamesPlaceHolder(paramList);
@@ -354,7 +443,8 @@ public class JavaSyntaxTool {
 	 * @param paramList
 	 * @return
 	 */
-	private static List<String> getNames(String paramList) {
+	private static List<String> getNames(String _paramList) {
+		String paramList = _paramList;
 		paramList = paramList.replace(' ', ',');
 		String[] pams = paramList.split(",");
 		List<String> names = new ArrayList<String>();
@@ -442,7 +532,8 @@ public class JavaSyntaxTool {
 	 *            Type1 p1, Type2 p2...
 	 * @return Final Type1 p1, final Type2 p2...
 	 */
-	public static String addFinalToAllParams(String paramline) {
+	public static String addFinalToAllParams(String _paramline) {
+		String paramline = _paramline;
 		if (paramline == null)
 			return null;
 		paramline = paramline.trim();
@@ -463,7 +554,8 @@ public class JavaSyntaxTool {
 	 * @param paramline
 	 * @return
 	 */
-	public static String boxPrimitiveTypesInParams(String paramline) {
+	public static String boxPrimitiveTypesInParams(String _paramline) {
+		String paramline = _paramline;
 		if (paramline == null)
 			return null;
 		paramline = paramline.trim();
@@ -489,7 +581,8 @@ public class JavaSyntaxTool {
 	 * @param src
 	 * @return the longest or "" in case of none
 	 */
-	public static String matchLongestPossibleExpr(String src) {
+	public static String matchLongestPossibleExpr(String _src) {
+		String src = _src;
 		if (src == null || src.trim().length() == 0)
 			return "";
 
@@ -539,8 +632,8 @@ public class JavaSyntaxTool {
 	 *            int i, int[] ia, etc
 	 * @return the wrapper form
 	 */
-	public static String cleanDeclPrimitive(String decl) {
-		decl = decl.trim();
+	public static String cleanDeclPrimitive(String _decl) {
+		String decl = _decl.trim();
 		int i = decl.length();
 		String var = "";
 		String type = "";
@@ -646,9 +739,8 @@ public class JavaSyntaxTool {
 			r[0] = m.group(1);
 			r[1] = m.group(2);
 			return r;
-		} else {
-			return new String[] { s };
 		}
+		return new String[] { s };
 	}
 
 	public static boolean isValidExpr(String expr) {
@@ -752,7 +844,8 @@ public class JavaSyntaxTool {
 	
 	public final static Pattern methPattern = Pattern.compile("[\\w\\.\\$\\s]+\\(.*\\)");
 	
-	public static boolean isValidMethodCallSimple(String src) {
+	public static boolean isValidMethodCallSimple(String _src) {
+		String src = _src;
 		if (src == null )
 			return false;
 		src = src.trim();
@@ -794,8 +887,8 @@ public class JavaSyntaxTool {
 	}
 	
 	
-	public static boolean isOpenIf(String part) {
-		part = part.trim();
+	public static boolean isOpenIf(String _part) {
+		String part = _part.trim();
 		if (part.endsWith("{"))
 			part = part.substring(0, part.length() - 1);
 		String classString = String.format(IF_PREDICATE_OPEN, part);
@@ -829,9 +922,9 @@ public class JavaSyntaxTool {
 	public static class CodeNode{
 		public int nestLevel;
 		public Node node;
-		public CodeNode(int nestLevel, Node node) {
-			this.nestLevel = nestLevel;
-			this.node = node;
+		public CodeNode(int _nestLevel, Node _node) {
+			this.nestLevel = _nestLevel;
+			this.node = _node;
 		}
 		
 	}
@@ -840,8 +933,8 @@ public class JavaSyntaxTool {
 		BinaryExpr expr;
 		
 		
-		public BinaryOrExpr(BinaryExpr expr) {
-			this.expr = expr;
+		public BinaryOrExpr(BinaryExpr _expr) {
+			this.expr = _expr;
 		}
 
 		@Override

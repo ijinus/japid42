@@ -5,6 +5,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.eclipse.jdt.internal.compiler.CompilationResult;
+import org.eclipse.jdt.internal.compiler.Compiler;
+import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
+import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
+import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
+import static org.eclipse.jdt.internal.compiler.impl.CompilerOptions.*;
+import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
+
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.util.JapidFlags;
 
@@ -47,6 +55,8 @@ public class RendererCompiler {
 				javaVersion = VERSION_1_6;
 			else if(version.startsWith("1.7"))
 				javaVersion = VERSION_1_7;
+			else if(version.startsWith("1.8"))
+				javaVersion = VERSION_1_8;
 			else if(version.startsWith("1.5"))
 				javaVersion = VERSION_1_5;
 		} catch (Exception e) {}

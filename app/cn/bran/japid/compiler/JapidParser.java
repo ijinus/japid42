@@ -33,18 +33,18 @@ public class JapidParser {
 	private static final String VERBATIM2 = "verbatim";
 	private String pageSource;
 
-	public JapidParser(String pageSource) {
+	public JapidParser(String _pageSource1) {
 		// hack: allow $[] string interpolation in String literals in script block. 
 		// see: https://github.com/branaway/Japid/issues/19
-		pageSource = pageSource.replaceAll(JapidParser.PLACE_HOLDER_PATTERN_S, JapidParser.SUB_PATTERN_S);
+		String _pageSource = _pageSource1.replaceAll(JapidParser.PLACE_HOLDER_PATTERN_S, JapidParser.SUB_PATTERN_S);
 
 		// detect marker
 		// the logic is to find the first line that starts with either ` or @
-		char mar = detectMarker(pageSource);
+		char mar = detectMarker(_pageSource);
 		setMarker(mar);
 
-		this.pageSource = pageSource;
-		this.len = pageSource.length();
+		this.pageSource = _pageSource;
+		this.len = _pageSource.length();
 		
 	}
 
@@ -156,9 +156,8 @@ public class JapidParser {
 		String token = this.pageSource.substring(0, this.begin2);
 		if (token.indexOf("\n") == -1) {
 			return 1;
-		} else {
-			return token.split("\n").length;
 		}
+		return token.split("\n").length;
 	}
 
 	public String getToken() {
@@ -230,10 +229,9 @@ public class JapidParser {
 						if (c2 == '\n') {
 							i ++; i++;
 							continue;
-						} else {
-							i++;
-							continue;
 						}
+						i++;
+						continue;
 					} else if (c1 == '\n') {
 						i++;
 						continue;
@@ -274,10 +272,9 @@ public class JapidParser {
 					if (c2 == '\n') {
 						skip(3);
 						continue;
-					} else {
-						skip(2);
-						continue;
 					}
+					skip(2);
+					continue;
 				} else if (c1 == '\n') {
 					skip(2);
 					continue;
@@ -579,6 +576,12 @@ public class JapidParser {
 					return found(Token.PLAIN, 1);
 				}
 				break;
+			case EOF:
+				break;
+			case EXPR_WING:
+				break;
+			default:
+				break;
 			}
 		}
 	}
@@ -764,13 +767,13 @@ public class JapidParser {
 	public List<TokenPair> allTokens() {
 		List<TokenPair> result = new ArrayList<TokenPair>();
 		loop: for (;;) {
-			Token state = nextToken();
-			switch (state) {
+			Token state1 = nextToken();
+			switch (state1) {
 			case EOF:
 				break loop;
 			default:
 				String tokenstring = getToken();
-				result.add(new TokenPair(state, tokenstring));
+				result.add(new TokenPair(state1, tokenstring));
 			}
 		}
 		return result;

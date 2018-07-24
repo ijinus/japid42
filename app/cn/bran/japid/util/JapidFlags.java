@@ -10,7 +10,7 @@ public class JapidFlags {
 //	static {
 //		System.out.println("JapidFlags.<cinit>()");
 //	}
-
+	
 	static private HashSet<File> versionCheckedDirs = new HashSet<File>();
 	
 	static public boolean isDirVersionChecked (File dir) {
@@ -57,7 +57,8 @@ public class JapidFlags {
 			out(string);
 	}
 
-	public static void out(String string) {
+	public static void out(String _string) {
+		String string = _string;
 		if (!string.startsWith("[Japid"))
 			string = "[Japid]" + " " + string.trim();
 		System.out.println(string);
@@ -158,14 +159,10 @@ public class JapidFlags {
 		out("japid log level: " + logLevel + ". Call " + JapidFlags.class.getCanonicalName() + ".setLogLevel(LogLevel ll) to change it.");
 	}
 
-	/**
-	 * @author Bing Ran (bing.ran@gmail.com)
-	 * @param versionCheckedDirs2
-	 */
 	public static void setVersionCheckedDirs(HashSet<File> versionCheckedDirs2) {
 		versionCheckedDirs = versionCheckedDirs2;
 	}
-
+	
 	public static HashSet<File> getVersionCheckedDirs() {
 		return versionCheckedDirs;
 	}

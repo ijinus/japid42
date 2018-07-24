@@ -25,7 +25,7 @@ import java.util.Iterator;
  * 
  */
 public class Each extends SimpleTag {
-	public static final String sourceTemplate = "tag/Each.html";
+	public static final String sourceTemplate1 = "tag/Each.html";
 
 	public Each(StringBuilder out) {
 		super(out);

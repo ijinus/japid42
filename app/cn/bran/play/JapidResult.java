@@ -4,9 +4,17 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.io.StringBufferInputStream;
+import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
+import play.twirl.api.Content;
+import play.http.HttpEntity;
+import play.mvc.Results;
+import play.mvc.StatusHeader;
+import scala.collection.Seq;
 import cn.bran.japid.template.RenderResult;
 
 /**
@@ -33,12 +41,13 @@ import cn.bran.japid.template.RenderResult;
  * @author bran
  * 
  */
-public class JapidResult extends Results.Status implements Externalizable, Content {
+public class JapidResult extends StatusHeader implements Externalizable {
 	public static final String CONTENT_TYPE = "Content-Type";
 	public static final String CACHE_CONTROL = "Cache-Control";
 
 	private RenderResult renderResult;
 	private Map<String, String> headers = new HashMap<String, String>();
+
 //	private boolean eager = false;
 
 //	String resultContent = "";
@@ -54,15 +63,16 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	// }
 
 	public JapidResult(RenderResult r) {
-		super(play.core.j.JavaResults.Status(200), r.getContent().toString(), play.api.mvc.Codec.javaSupported("utf-8") );
+		super(200);//,new StringReader(r.getContent().toString()) );
+		
 		this.renderResult = r;
 		this.setHeaders(r.getHeaders());
     	Seq<scala.Tuple2<String, String>> seq = scala.collection.JavaConversions.mapAsScalaMap(this.renderResult.getHeaders()).toSeq();
-		super.getWrappedSimpleResult().withHeaders(seq);
+		super.asScala().withHeaders(seq);
 	}
 
 	public JapidResult() {
-		super(play.core.j.JavaResults.Status(200));
+		super(200);
 	}
 
 
@@ -113,10 +123,10 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	}
 
 	/**
-	 * @param headers the headers to set
+	 * @param _headers the headers to set
 	 */
-	private void setHeaders(Map<String, String> headers) {
-		this.headers = headers;
+	private void setHeaders(Map<String, String> _headers) {
+		this.headers = _headers;
 	}
 
 	@Override
@@ -128,16 +138,34 @@ public class JapidResult extends Results.Status implements Externalizable, Conte
 	 * @see play.api.mvc.Content#body()
 	 */
 	@Override
-	public String body() {
-		return this.renderResult == null? null : this.renderResult.getText();
+	public HttpEntity body() {
+		return HttpEntity.fromString(this.renderResult.getText(), "utf-8");
 	}
 
 	/* (non-Javadoc)
 	 * @see play.api.mvc.Content#contentType()
 	 */
 	@Override
-	public String contentType() {
-		return this.renderResult == null? null : this.renderResult.getContentType();
+	public Optional<String> contentType() {
+		return this.renderResult == null ? Optional.empty() : Optional.of(this.renderResult.getContentType());
+	}
+
+	public Content getContent() {
+		return new innerContent();
+	}
+
+	private class innerContent implements Content {
+
+		@Override
+		public String body() {
+			return renderResult.getText();
+		}
+
+		@Override
+		public String contentType() {
+			return renderResult == null ? "" : renderResult.getContentType();
+		}
+
 	}
 
 //	/* (non-Javadoc)

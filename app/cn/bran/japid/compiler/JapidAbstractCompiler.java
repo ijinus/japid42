@@ -97,7 +97,7 @@ public abstract class JapidAbstractCompiler {
 
 	public void compile(JapidTemplate t) {
 		this.template = t;
-		String tname = t.name;
+		String tname = t.name.replace('\\', '/');
 		int lastSlash = tname.lastIndexOf("/");
 		if (lastSlash >= 0) {
 			tname = tname.substring(lastSlash + 1);
@@ -189,6 +189,14 @@ public abstract class JapidAbstractCompiler {
 			case TEMPLATE_ARGS:
 				templateArgs(token);
 				break;
+			case ACTION_CURLY:
+				break;
+			case EXPR_NATURAL:
+				break;
+			case EXPR_WING:
+				break;
+			default:
+				break;
 			}
 		}
 	}
@@ -219,9 +227,7 @@ public abstract class JapidAbstractCompiler {
 			String r = text.trim();
 			if (r.length() == 0)
 				return;
-			else {
-				text = text.trim();
-			}
+			text = text.trim();
 		}
 		String lines = composeValidMultiLines(text);
 		String ref = this.getTemplateClassMetaData().addStaticText(lines, text);
@@ -503,11 +509,11 @@ public abstract class JapidAbstractCompiler {
 				String src;
 				try {
 					src = DirUtil.readFileAsString(target);
-					JapidTemplate template = new JapidTemplate(target, src);
+					JapidTemplate _template = new JapidTemplate(target, src);
 					JapidAbstractCompiler c = JapidTemplateTransformer.selectCompiler(src);
 					c.setUseWithPlay(getTemplateClassMetaData().useWithPlay);
-					c.compile(template);
-					String jsrc = template.javaSource;
+					c.compile(_template);
+					String jsrc = _template.javaSource;
 					getTemplateClassMetaData().merge(c.getTemplateClassMetaData());
 					println("/* include %s */", target);
 					String code = extractRenderingCode(jsrc);
@@ -741,8 +747,8 @@ public abstract class JapidAbstractCompiler {
 	 * @param line
 	 * @return
 	 */
-	private String parseInclude(String line) {
-		line = line.trim();
+	private String parseInclude(String _line) {
+		String line = _line.trim();
 		if (line.startsWith(INCLUDE + " ") || line.startsWith(INCLUDE + "\t")) {
 			line = line.substring(INCLUDE.length()).trim();
 		}
@@ -765,9 +771,10 @@ public abstract class JapidAbstractCompiler {
 		println(String.format(format, target));
 	}
 
-	private void handleOpenElseIf(int i, String expr, boolean negative) {
+	private void handleOpenElseIf(int i, String _expr, boolean negative) {
 //		expr = expr.substring(1).trim();
 		// end previous if shadow and star a new one
+		String expr = _expr;
 		verifyExpr(expr);
 		Tag tagShadow = this.tagsStackShadow.peek();
 		if (tagShadow instanceof TagIf) {
@@ -827,8 +834,8 @@ public abstract class JapidAbstractCompiler {
 	 * @param string
 	 * @return
 	 */
-	protected static boolean startsWithIgnoreSpace(String line, String string) {
-		line = line.trim();
+	protected static boolean startsWithIgnoreSpace(String _line, String string) {
+		String line = _line.trim();
 		return line.startsWith(string + " ") || line.startsWith(string + "\t");
 	}
 
@@ -844,16 +851,15 @@ public abstract class JapidAbstractCompiler {
 	/**
 	 * @param args
 	 */
-	private void doActionInvokeDirective(String args) {
+	private void doActionInvokeDirective(String _args) {
 		if (!getTemplateClassMetaData().useWithPlay) {
 			throw new JapidCompilationException(this.template, this.parser.getLineNumber(), "action invocation is only supported in Play environment. ");
-		} else {
-			this.getTemplateClassMetaData().setHasActionInvocation();
-			if (args.trim().length() == 0)
-				args = "whatyouwantoinvoke()";
-			printActionInvocation(args);
 		}
-		
+		String args = _args;
+		this.getTemplateClassMetaData().setHasActionInvocation();
+		if (args.trim().length() == 0)
+			args = "whatyouwantoinvoke()";
+		printActionInvocation(args);
 	}
 
 	/**
@@ -926,8 +932,8 @@ public abstract class JapidAbstractCompiler {
 		markLine(this.parser.getLineNumber());
 	}
 
-	protected void message(String token) {
-		token = token.trim();
+	protected void message(String _token) {
+		String token = _token.trim();
 		List<String> args = null;
 		try {
 			args = JavaSyntaxTool.parseArgs(token);
@@ -1406,7 +1412,7 @@ public abstract class JapidAbstractCompiler {
 
 		if (ttl == null) {
 			// should be deprecated
-			String template =
+			String _template =
 					"		%s.put(getOut().length(), new %s() {\n" +
 							"			@Override\n" +
 							"			public %s run() {\n" +
@@ -1419,50 +1425,49 @@ public abstract class JapidAbstractCompiler {
 							"				throw new RuntimeException(\"No render result from running: %s\");\n" +
 							"			}\n" +
 							"		});";
-			return String.format(template,
+			return String.format(_template,
 					AbstractTemplateClassMetaData.ACTION_RUNNERS,
 					ActionRunner.class.getName(),
 					RenderResult.class.getName(),
 					action,
 					JAPID_RESULT,
 					actionEscaped);
-		} else {
-			String template =
-					"		%s.put(getOut().length(), new %s(%s, %s, %s, %s) {\n" +
-							"			@Override\r\n" +
-							"			public %s runPlayAction()  {\n" +
-							// "				super.checkActionCacheFor(%s.class, \"%s\");\n"
-							// +
-							"				return (%s)%s; " + makeLineMarker(this.parser.getLineNumber()) + "\n" +
-							"			}\n" +
-							"		}); p(\"\\n\");"; // hack: a new line char to stand for the action position.
-			// Should really change the action runner collection to <int, List<ActionRunner>> 
-			
-			// hard-code the cache action runner name to avoid dependency on the
-			// Play jar
-			return String.format(template,
-					AbstractTemplateClassMetaData.ACTION_RUNNERS,
-					"cn.bran.play.CacheablePlayActionRunner",
-					ttl,
-					controllerName + ".class",
-					"\"" + actionName + "\"",
-					"".equals(keys) ? "\"\"" : keys,
-					JAPID_RESULT,
-					JAPID_RESULT,
-					action
-					);
-			// return String.format(template,
-			// AbstractTemplateClassMetaData.ACTION_RUNNERS,
-			// "cn.bran.play.CacheablePlayActionRunner",
-			// ttl,
-			// base,
-			// "".equals(keys) ? "\"\"" : keys,
-			// JAPID_RESULT,
-			// controllerName,
-			// actionName,
-			// action
-			// );
 		}
+		String _template =
+				"		%s.put(getOut().length(), new %s(%s, %s, %s, %s) {\n" +
+						"			@Override\r\n" +
+						"			public %s runPlayAction()  {\n" +
+						// "				super.checkActionCacheFor(%s.class, \"%s\");\n"
+						// +
+						"				return (%s)%s; " + makeLineMarker(this.parser.getLineNumber()) + "\n" +
+						"			}\n" +
+						"		}); p(\"\\n\");"; // hack: a new line char to stand for the action position.
+		// Should really change the action runner collection to <int, List<ActionRunner>> 
+		
+		// hard-code the cache action runner name to avoid dependency on the
+		// Play jar
+		return String.format(_template,
+				AbstractTemplateClassMetaData.ACTION_RUNNERS,
+				"cn.bran.play.CacheablePlayActionRunner",
+				ttl,
+				controllerName + ".class",
+				"\"" + actionName + "\"",
+				"".equals(keys) ? "\"\"" : keys,
+				JAPID_RESULT,
+				JAPID_RESULT,
+				action
+				);
+		// return String.format(template,
+		// AbstractTemplateClassMetaData.ACTION_RUNNERS,
+		// "cn.bran.play.CacheablePlayActionRunner",
+		// ttl,
+		// base,
+		// "".equals(keys) ? "\"\"" : keys,
+		// JAPID_RESULT,
+		// controllerName,
+		// actionName,
+		// action
+		// );
 
 	}
 

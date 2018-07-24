@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import play.mvc.Controller;
+import play.mvc.Http.Context.Implicit;
+import play.mvc.Http.Request;
 import cn.bran.japid.template.ActionRunner;
 import cn.bran.japid.template.RenderResult;
 
@@ -174,7 +177,7 @@ public abstract class CacheableRunner extends ActionRunner /*implements External
 	}
 
 
-	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+	public void readExternal(ObjectInput in) throws IOException {
 		this.ttlAbs = in.readUTF();
 		setKeyString(in.readUTF());
 		this.noCache = in.readBoolean();
@@ -192,8 +195,8 @@ public abstract class CacheableRunner extends ActionRunner /*implements External
 	/**
 	 * @param keyString the keyString to set
 	 */
-	public void setKeyString(String keyString) {
-		this.keyString = keyString;
+	public void setKeyString(String _keyString) {
+		this.keyString = _keyString;
 	}
 
 	/**

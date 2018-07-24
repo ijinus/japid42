@@ -1,7 +1,7 @@
 package cn.bran.play;
 
-import java.sql.Time;
-
+import play.cache.Cache;
+import play.libs.Time;
 import cn.bran.japid.template.RenderResult;
 
 /**
@@ -48,8 +48,8 @@ public class RenderResultCache {
 		return altCache;
 	}
 
-	public static void setAltCache(AltCache altCache) {
-		RenderResultCache.altCache = altCache;
+	public static void setAltCache(AltCache _altCache) {
+		RenderResultCache.altCache = _altCache;
 	}
 
 	/**

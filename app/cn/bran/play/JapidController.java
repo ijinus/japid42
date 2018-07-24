@@ -3,6 +3,11 @@ package cn.bran.play;
 import java.util.HashMap;
 import java.util.Map;
 
+import play.cache.Cache;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Http.Context;
+import play.mvc.Result;
 import cn.bran.japid.compiler.NamedArgRuntime;
 import cn.bran.japid.template.JapidRenderer;
 import cn.bran.japid.template.JapidTemplateBaseWithoutPlay;
@@ -111,8 +116,8 @@ public class JapidController extends Controller {
 	 * @param args
 	 * @return
 	 */
-	public static JapidResult renderJapidWith(String templateName, Object... args) {
-			templateName = getFullViewName(templateName);
+	public static JapidResult renderJapidWith(String _templateName, Object... args) {
+			String templateName = getFullViewName(_templateName);
 			JapidResult japidResult = new JapidResult(JapidRenderer.renderWith(templateName, args));
 			postProcess(japidResult);
 			return japidResult;
@@ -151,7 +156,8 @@ public class JapidController extends Controller {
 	}
 	
 	
-	private static String getFullViewName(String template) {
+	private static String getFullViewName(String _template) {
+		String template = _template;
 		if (template.startsWith("@")) {
 			template = template.substring(1);
 			// get parent path
@@ -162,8 +168,8 @@ public class JapidController extends Controller {
 		return template;
 	}
 
-	public static JapidResult renderJapidWith(String template, NamedArgRuntime[] namedArgs) {
-		template = getFullViewName(template);
+	public static JapidResult renderJapidWith(String _template, NamedArgRuntime[] namedArgs) {
+		String template = getFullViewName(_template);
 		JapidResult japidResult = new JapidResult(JapidRenderer.getRenderResultWith(template, namedArgs));
 		return postProcess(japidResult);
 	}
@@ -173,7 +179,7 @@ public class JapidController extends Controller {
 		String japidControllerInvoker = threadData.get().remove(GlobalSettingsWithJapid.ACTION_METHOD);
 		// use the thread local is not reliable nor correct if the action forwards to another action. 
 		// disable it
-		if (true || japidControllerInvoker == null) {
+		if (true) {
 			// return StackTraceUtils.getJapidRenderInvoker();
 			japidControllerInvoker = StackTraceUtils.getJapidControllerInvoker(method);
 		}
@@ -188,18 +194,17 @@ public class JapidController extends Controller {
 		String format = resolveFormat(Context.current.get());
 		if ("html".equals(format)) {
 			return expr;
-		} else {
-			String expr_format = expr + "_" + format;
-			try {
-				Class<?> appClass = JapidRenderer.getClass(JapidRenderer.getTemplateClassName(expr_format));
-				if (appClass != null)
-					return expr_format;
-				else {
-					return expr;
-				}
-			} catch (RuntimeException e) {
+		}
+		String expr_format = expr + "_" + format;
+		try {
+			Class<?> appClass = JapidRenderer.getClass(JapidRenderer.getTemplateClassName(expr_format));
+			if (appClass != null)
+				return expr_format;
+			else {
 				return expr;
 			}
+		} catch (RuntimeException e) {
+			return expr;
 		}
 	}
 
@@ -252,9 +257,8 @@ public class JapidController extends Controller {
 		Object object = Cache.get(caller);
 		if (object instanceof RenderResult) {
 			return (RenderResult) object;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -273,9 +277,8 @@ public class JapidController extends Controller {
 		Object object = Cache.get(caller);
 		if (object instanceof RenderResult) {
 			return (RenderResult) object;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**

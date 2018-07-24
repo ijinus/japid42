@@ -28,10 +28,10 @@ public class TemplateClassLoader extends ClassLoader {
 
 	private ClassLoader parentClassLoader;
 
-	public TemplateClassLoader(ClassLoader parentClassLoader) {
+	public TemplateClassLoader(ClassLoader _parentClassLoader) {
 		super(TemplateClassLoader.class.getClassLoader());
 //		super(parentClassLoader);
-		this.parentClassLoader = parentClassLoader;
+		this.parentClassLoader = _parentClassLoader;
 		
 	}
 
@@ -44,46 +44,45 @@ public class TemplateClassLoader extends ClassLoader {
 			}
 			Class<?> superClass = super.loadClass(name);
 			return superClass;
-		} else {
-			String oid = "[TemplateClassLoader@" + Integer.toHexString(hashCode()) + "]";
-
-			Class<?> cla = this.localClasses.get(name);
-			if (cla != null) {
-				return cla;
-			}
-
-			RendererClass rc = JapidRenderer.japidClasses.get(name);
-			if (rc == null)
-				throw new ClassNotFoundException("Japid could not resolve class: " + name);
-
-			if (!rc.getClassName().contains("$")) {
-				// added just in time compiling
-				JapidRenderer.recompile(rc);
-			}
-			
-			byte[] bytecode = rc.bytecode;
-
-			if (bytecode == null) {
-				throw new RuntimeException(oid + " could not find the bytecode for: " + name);
-			}
-
-			// the defineClass method will load the classes of the dependency
-			// classes.
-			@SuppressWarnings("unchecked")
-			Class<? extends JapidTemplateBaseWithoutPlay> cl = (Class<? extends JapidTemplateBaseWithoutPlay>) defineClass(
-					name, bytecode, 0, bytecode.length);
-			rc.setClz(cl);
-			this.localClasses.put(name, cl);
-			rc.setLastDefined(System.currentTimeMillis());
-			return cl;
 		}
+		String oid = "[TemplateClassLoader@" + Integer.toHexString(hashCode()) + "]";
+
+		Class<?> cla = this.localClasses.get(name);
+		if (cla != null) {
+			return cla;
+		}
+
+		RendererClass rc = JapidRenderer.japidClasses.get(name);
+		if (rc == null)
+			throw new ClassNotFoundException("Japid could not resolve class: " + name);
+
+		if (!rc.getClassName().contains("$")) {
+			// added just in time compiling
+			JapidRenderer.recompile(rc);
+		}
+		
+		byte[] bytecode = rc.bytecode;
+
+		if (bytecode == null) {
+			throw new RuntimeException(oid + " could not find the bytecode for: " + name);
+		}
+
+		// the defineClass method will load the classes of the dependency
+		// classes.
+		@SuppressWarnings("unchecked")
+		Class<? extends JapidTemplateBaseWithoutPlay> cl = (Class<? extends JapidTemplateBaseWithoutPlay>) defineClass(
+				name, bytecode, 0, bytecode.length);
+		rc.setClz(cl);
+		this.localClasses.put(name, cl);
+		rc.setLastDefined(System.currentTimeMillis());
+		return cl;
 	}
 
 	/**
 	 * Search for the byte code of the given class.
 	 */
-	protected byte[] getClassDefinition(String name) {
-		name = name.replace(".", "/") + ".class";
+	protected byte[] getClassDefinition(String _name) {
+		String name = _name.replace(".", "/") + ".class";
 		InputStream is = getResourceAsStream(name);
 		if (is == null) {
 //			is = parentClassLoader.getResourceAsStream(name);

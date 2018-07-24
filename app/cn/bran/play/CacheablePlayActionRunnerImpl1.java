@@ -7,8 +7,8 @@ public class CacheablePlayActionRunnerImpl1 extends CacheablePlayActionRunner{
 		return this.runAction;
 	}
 
-	public void setRunAction(RunAction runAction) {
-		this.runAction = runAction;
+	public void setRunAction(RunAction _runAction) {
+		this.runAction = _runAction;
 	}
 
 	public CacheablePlayActionRunnerImpl1(String ttl) {

@@ -44,10 +44,10 @@ public abstract class JapidTemplateBase extends JapidTemplateBaseWithoutPlay {
 		}
 	}
 
-	public JapidTemplateBase(JapidTemplateBaseWithoutPlay caller) {
-		super(caller);
-		if (caller instanceof JapidTemplateBase){
-			setActionRunners(((JapidTemplateBase)caller).getActionRunners());
+	public JapidTemplateBase(JapidTemplateBaseWithoutPlay _caller) {
+		super(_caller);
+		if (_caller instanceof JapidTemplateBase){
+			setActionRunners(((JapidTemplateBase)_caller).getActionRunners());
 		}
 		initme();
 	}
@@ -62,8 +62,8 @@ public abstract class JapidTemplateBase extends JapidTemplateBaseWithoutPlay {
 	}
 
 	public JapidTemplateBaseWithoutPlay setActionRunners(
-			TreeMap<Integer, cn.bran.japid.template.ActionRunner> actionRunners) {
-		this.actionRunners = actionRunners;
+			TreeMap<Integer, cn.bran.japid.template.ActionRunner> _actionRunners) {
+		this.actionRunners = _actionRunners;
 		return this;
 	}
 

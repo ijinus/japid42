@@ -11,6 +11,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+import org.reflections.Reflections;
+
+import play.Application;
+import play.GlobalSettings;
+import play.libs.F.Tuple;
+import play.mvc.Result;
 import cn.bran.japid.util.JapidFlags;
 
 /**
@@ -80,47 +90,48 @@ public class JaxrsRouter {
 	 * @return action handler
 	 * 
 	 */
-	public static Handler handlerFor(final play.mvc.Http.RequestHeader r) {
+	public static play.api.mvc.Handler handlerFor(final play.mvc.Http.RequestHeader r) {
 		if (assetServing.length == 2 && r.path().startsWith(assetServing[0])) {
 			// serve static asset
 //			return controllers.Assets.at(assetServing[1], r.path().replaceFirst(assetServing[0], ""));
 			return null;
-		} else {
-			final RouterClass targetRouterClass = RouterUtils.findLongestMatch(routerClasses, r);
-			if (targetRouterClass == null)
-				return null;
+		}
+		final RouterClass targetRouterClass = RouterUtils.findLongestMatch(routerClasses, r);
+		if (targetRouterClass == null)
+			return null;
 
-			final Tuple<Method, Object[]> methodWithArgs = targetRouterClass.findMethodAndGenerateArgs(r);
+		final Tuple<Method, Object[]> methodWithArgs = targetRouterClass.findMethodAndGenerateArgs(r);
 
-			if (methodWithArgs != null) {
-				ResultBuilder resultBuilder = new ResultBuilder() {
-					@Override
-					public SimpleResult create() {
-						try {
-							Method m = methodWithArgs._1;
-							Class<?> cl = targetRouterClass.clz;
-							Object obj = global.getControllerInstance(cl);
-							if (obj == null && (m.getModifiers() & Modifier.STATIC) != Modifier.STATIC) {
-								throw new RuntimeException("the action method is not static while the target object is null: " + targetRouterClass.clz + "#" + m.getName());
-							}
-							Object[] args = methodWithArgs._2;
-							SimpleResult result = (SimpleResult)m.invoke(obj, args);
-							Produces produces = methodWithArgs._1.getAnnotation(Produces.class);
-							return produces != null ? new WrapProducer(produces.value()[0], result) : result;
-						} catch (InvocationTargetException cause) {
-							System.err.println("Exception occured while trying to invoke: " + targetRouterClass.clz.getName()
-									+ "#" + methodWithArgs._1.getName() + " with " + methodWithArgs._2 + " for uri:" + r.path());
-							throw new RuntimeException(cause.getCause());
-						} catch (Exception e) {
-							e.printStackTrace();
-							throw new RuntimeException(e.getCause());
+		if (methodWithArgs != null) {
+			ResultBuilder resultBuilder = new ResultBuilder() {
+				@Override
+				public Result create() {
+					try {
+						Method m = methodWithArgs._1;
+						Class<?> cl = targetRouterClass.clz;
+						Object obj = play.Play.application().injector().instanceOf(cl);
+						if (obj == null && (m.getModifiers() & Modifier.STATIC) != Modifier.STATIC) {
+							throw new RuntimeException("the action method is not static while the target object is null: " + targetRouterClass.clz + "#" + m.getName());
 						}
+						Object[] args = methodWithArgs._2;
+						Result result = (Result)m.invoke(obj, args);
+						Produces produces = methodWithArgs._1.getAnnotation(Produces.class);
+						return produces != null ? new WrapProducer(produces.value()[0], result) : result;
+					} catch (InvocationTargetException cause) {
+						System.err.println("Exception occured while trying to invoke: " + targetRouterClass.clz.getName()
+								+ "#" + methodWithArgs._1.getName() + " with " + methodWithArgs._2 + " for uri:" + r.path());
+						throw new RuntimeException(cause.getCause());
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new RuntimeException(e.getCause());
 					}
-				};
+				}
+			};
 
-				JavaActionBridge handler = new JavaActionBridge(targetRouterClass.clz, methodWithArgs._1, resultBuilder);
-				return handler;
-			}
+			//JavaActionBridge handler = new JavaActionBridge(targetRouterClass.clz, methodWithArgs._1, resultBuilder);
+			//return handler;
+			return null;
+			
 		}
 		JapidFlags.debug("Japid router could not route this request");
 		return null;

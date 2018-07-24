@@ -1,114 +1,547 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output=".target" path="app"/>
-	<classpathentry kind="src" output=".target" path="test"/>
-	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play_2.10/2.2.1/jars/play_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/sbt-link/2.2.1/jars/sbt-link.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.javassist/javassist/3.18.0-GA/bundles/javassist.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-exceptions/2.2.1/jars/play-exceptions.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/templates_2.10/2.2.1/jars/templates_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.github.scala-incubator.io/scala-io-file_2.10/0.4.2/jars/scala-io-file_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.github.scala-incubator.io/scala-io-core_2.10/0.4.2/jars/scala-io-core_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.jsuereth/scala-arm_2.10/1.3/jars/scala-arm_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-iteratees_2.10/2.2.1/jars/play-iteratees_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.scala-stm/scala-stm_2.10/0.7/jars/scala-stm_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe/config/1.0.2/bundles/config.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-json_2.10/2.2.1/jars/play-json_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-functional_2.10/2.2.1/jars/play-functional_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-datacommons_2.10/2.2.1/jars/play-datacommons_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/joda-time/joda-time/2.2/jars/joda-time.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.joda/joda-convert/1.3.1/jars/joda-convert.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.fasterxml.jackson.core/jackson-annotations/2.2.2/jars/jackson-annotations.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.fasterxml.jackson.core/jackson-core/2.2.2/jars/jackson-core.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.fasterxml.jackson.core/jackson-databind/2.2.2/jars/jackson-databind.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/io.netty/netty/3.7.0.Final/bundles/netty.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.netty/netty-http-pipelining/1.1.2/jars/netty-http-pipelining.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.slf4j/slf4j-api/1.7.5/jars/slf4j-api.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.slf4j/jul-to-slf4j/1.7.5/jars/jul-to-slf4j.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.slf4j/jcl-over-slf4j/1.7.5/jars/jcl-over-slf4j.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/ch.qos.logback/logback-core/1.0.13/jars/logback-core.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/ch.qos.logback/logback-classic/1.0.13/jars/logback-classic.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.akka/akka-actor_2.10/2.2.0/jars/akka-actor_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.akka/akka-slf4j_2.10/2.2.0/bundles/akka-slf4j_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.apache.commons/commons-lang3/3.1/jars/commons-lang3.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.ning/async-http-client/1.7.18/jars/async-http-client.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/oauth.signpost/signpost-core/1.2.1.2/jars/signpost-core.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/oauth.signpost/signpost-commonshttp4/1.2.1.2/jars/signpost-commonshttp4.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/commons-logging/commons-logging/1.1.1/jars/commons-logging.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/xerces/xercesImpl/2.11.0/jars/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/xml-apis/xml-apis/1.4.01/jars/xml-apis.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/javax.transaction/jta/1.1/jars/jta.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-java_2.10/2.2.1/jars/play-java_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.yaml/snakeyaml/1.12/bundles/snakeyaml.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.hibernate/hibernate-validator/5.0.1.Final/jars/hibernate-validator.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/javax.validation/validation-api/1.1.0.Final/jars/validation-api.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.jboss.logging/jboss-logging/3.1.1.GA/jars/jboss-logging.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.fasterxml/classmate/0.8.0/bundles/classmate.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.springframework/spring-context/3.2.3.RELEASE/jars/spring-context.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.springframework/spring-core/3.2.3.RELEASE/jars/spring-core.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.springframework/spring-beans/3.2.3.RELEASE/jars/spring-beans.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.reflections/reflections/0.9.8/jars/reflections.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.google.guava/guava/14.0.1/bundles/guava.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.google.code.findbugs/jsr305/2.0.1/jars/jsr305.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/javax.servlet/javax.servlet-api/3.0.1/jars/javax.servlet-api.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-cache_2.10/2.2.1/jars/play-cache_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/net.sf.ehcache/ehcache-core/2.6.6/jars/ehcache-core.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/cache/org.apache.commons/commons-email/jars/commons-email-1.2.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/cache/javax.mail/mail/jars/mail-1.4.1.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/cache/javax.activation/activation/jars/activation-1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/cache/commons-lang/commons-lang/jars/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/cache/org.eclipse.tycho/org.eclipse.jdt.core/jars/org.eclipse.jdt.core-3.8.2.v20120814-155456.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/cache/com.google.code.javaparser/javaparser/jars/javaparser-1.0.8.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/cache/javax.ws.rs/jsr311-api/jars/jsr311-api-1.1-ea.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.typesafe.play/play-test_2.10/2.2.1/jars/play-test_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/junit/junit/4.11/jars/junit.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.hamcrest/hamcrest-core/1.3/jars/hamcrest-core.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.specs2/specs2_2.10/2.1.1/jars/specs2_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.scalaz/scalaz-core_2.10/7.0.2/bundles/scalaz-core_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.scalaz/scalaz-concurrent_2.10/7.0.2/bundles/scalaz-concurrent_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.scalaz/scalaz-effect_2.10/7.0.2/bundles/scalaz-effect_2.10.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/com.novocode/junit-interface/0.10/jars/junit-interface.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.scala-tools.testing/test-interface/0.5/jars/test-interface.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.fluentlenium/fluentlenium-festassert/0.8.0/jars/fluentlenium-festassert.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.fluentlenium/fluentlenium-core/0.8.0/jars/fluentlenium-core.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-java/2.32.0/jars/selenium-java.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-android-driver/2.32.0/jars/selenium-android-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-remote-driver/2.32.0/jars/selenium-remote-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/cglib/cglib-nodep/2.1_3/jars/cglib-nodep.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.json/json/20080701/jars/json.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-api/2.32.0/jars/selenium-api.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.apache.httpcomponents/httpclient/4.2.1/jars/httpclient.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.apache.httpcomponents/httpcore/4.2.1/jars/httpcore.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/commons-codec/commons-codec/1.6/jars/commons-codec.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.apache.commons/commons-exec/1.1/jars/commons-exec.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/net.java.dev.jna/jna/3.4.0/jars/jna.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/net.java.dev.jna/platform/3.4.0/jars/platform.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-chrome-driver/2.32.0/jars/selenium-chrome-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-htmlunit-driver/2.32.0/jars/selenium-htmlunit-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/net.sourceforge.htmlunit/htmlunit/2.12/jars/htmlunit.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/xalan/xalan/2.7.1/jars/xalan.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/xalan/serializer/2.7.1/jars/serializer.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/commons-collections/commons-collections/3.2.1/jars/commons-collections.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.apache.httpcomponents/httpmime/4.2.3/jars/httpmime.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/net.sourceforge.htmlunit/htmlunit-core-js/2.12/jars/htmlunit-core-js.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.18/jars/nekohtml.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/net.sourceforge.cssparser/cssparser/0.9.9/jars/cssparser.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.w3c.css/sac/1.3/jars/sac.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/commons-io/commons-io/2.2/jars/commons-io.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.eclipse.jetty/jetty-websocket/8.1.9.v20130131/jars/jetty-websocket.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.eclipse.jetty/jetty-util/8.1.9.v20130131/jars/jetty-util.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.eclipse.jetty/jetty-io/8.1.9.v20130131/jars/jetty-io.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.eclipse.jetty/jetty-http/8.1.9.v20130131/jars/jetty-http.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-firefox-driver/2.32.0/jars/selenium-firefox-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-ie-driver/2.32.0/jars/selenium-ie-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-iphone-driver/2.32.0/jars/selenium-iphone-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-safari-driver/2.32.0/jars/selenium-safari-driver.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.webbitserver/webbit/0.4.14/jars/webbit.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.seleniumhq.selenium/selenium-support/2.32.0/jars/selenium-support.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.easytesting/fest-assert/1.4/jars/fest-assert.jar"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/repository/local/org.easytesting/fest-util/1.1.6/jars/fest-util.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/bran/projects/playversions/play2/framework/sbt/boot/scala-2.10.2/lib/scala-library.jar" sourcepath="/Users/bran/.m2/repository/org/scala-lang/scala-library/2.10.2/scala-library-2.10.2-sources.jar"/>
-	<classpathentry kind="output" path="bin"/>
+  <classpathentry kind="src" path="app"/>
+  <classpathentry kind="src" path="conf"/>
+  <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"></classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\twirl-api_2.11\srcs\twirl-api_2.11-1.1.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\twirl-api_2.11\jars\twirl-api_2.11-1.1.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\twirl-api_2.11\docs\twirl-api_2.11-1.1.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.apache.commons\commons-lang3\srcs\commons-lang3-3.4-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.apache.commons\commons-lang3\jars\commons-lang3-3.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.apache.commons\commons-lang3\docs\commons-lang3-3.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\srcs\scala-xml_2.11-1.0.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\docs\scala-xml_2.11-1.0.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-server_2.11\srcs\play-server_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-server_2.11\docs\play-server_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play_2.11\srcs\play_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play_2.11\docs\play_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\build-link\srcs\build-link-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\build-link\docs\build-link-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-exceptions\srcs\play-exceptions-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-exceptions\docs\play-exceptions-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\srcs\play-iteratees_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\docs\play-iteratees_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.scala-stm\scala-stm_2.11\srcs\scala-stm_2.11-0.7-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.scala-stm\scala-stm_2.11\docs\scala-stm_2.11-0.7-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe\config\srcs\config-1.3.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe\config\bundles\config-1.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe\config\docs\config-1.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-json_2.11\srcs\play-json_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-json_2.11\docs\play-json_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-functional_2.11\srcs\play-functional_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-functional_2.11\docs\play-functional_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\srcs\play-datacommons_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\docs\play-datacommons_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\joda-time\joda-time\srcs\joda-time-2.9.6-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\joda-time\joda-time\docs\joda-time-2.9.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.joda\joda-convert\srcs\joda-convert-1.8.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.joda\joda-convert\jars\joda-convert-1.8.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.joda\joda-convert\docs\joda-convert-1.8.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\srcs\jackson-core-2.7.8-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\docs\jackson-core-2.7.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\srcs\jackson-annotations-2.7.8-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\docs\jackson-annotations-2.7.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\srcs\jackson-databind-2.7.8-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\docs\jackson-databind-2.7.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\srcs\jackson-datatype-jdk8-2.7.8-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\docs\jackson-datatype-jdk8-2.7.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\srcs\jackson-datatype-jsr310-2.7.8-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\docs\jackson-datatype-jsr310-2.7.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-netty-utils\srcs\play-netty-utils-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-netty-utils\docs\play-netty-utils-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.slf4j\jul-to-slf4j\srcs\jul-to-slf4j-1.7.21-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.slf4j\jul-to-slf4j\jars\jul-to-slf4j-1.7.21.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.slf4j\jul-to-slf4j\docs\jul-to-slf4j-1.7.21-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.slf4j\jcl-over-slf4j\srcs\jcl-over-slf4j-1.7.21-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.slf4j\jcl-over-slf4j\jars\jcl-over-slf4j-1.7.21.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.slf4j\jcl-over-slf4j\docs\jcl-over-slf4j-1.7.21-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-streams_2.11\srcs\play-streams_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-streams_2.11\docs\play-streams_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.reactivestreams\reactive-streams\srcs\reactive-streams-1.0.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.reactivestreams\reactive-streams\jars\reactive-streams-1.0.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.reactivestreams\reactive-streams\docs\reactive-streams-1.0.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\srcs\akka-stream_2.11-2.4.20-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.20.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\docs\akka-stream_2.11-2.4.20-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\srcs\akka-actor_2.11-2.4.20-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.20.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\docs\akka-actor_2.11-2.4.20-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-java8-compat_2.11\srcs\scala-java8-compat_2.11-0.7.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-java8-compat_2.11\bundles\scala-java8-compat_2.11-0.7.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-java8-compat_2.11\docs\scala-java8-compat_2.11-0.7.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe\ssl-config-core_2.11\srcs\ssl-config-core_2.11-0.2.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe\ssl-config-core_2.11\bundles\ssl-config-core_2.11-0.2.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe\ssl-config-core_2.11\docs\ssl-config-core_2.11-0.2.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\srcs\scala-parser-combinators_2.11-1.0.4-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\docs\scala-parser-combinators_2.11-1.0.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\srcs\akka-slf4j_2.11-2.4.20-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.20.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\docs\akka-slf4j_2.11-2.4.20-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\commons-codec\commons-codec\srcs\commons-codec-1.10-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\commons-codec\commons-codec\jars\commons-codec-1.10.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\commons-codec\commons-codec\docs\commons-codec-1.10-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\xerces\xercesImpl\srcs\xercesImpl-2.11.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\xerces\xercesImpl\docs\xercesImpl-2.11.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\xml-apis\xml-apis\srcs\xml-apis-1.4.01-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\xml-apis\xml-apis\docs\xml-apis-1.4.01-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\javax.transaction\jta\srcs\jta-1.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.google.inject\guice\srcs\guice-4.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.google.inject\guice\jars\guice-4.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.google.inject\guice\docs\guice-4.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\javax.inject\javax.inject\srcs\javax.inject-1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\javax.inject\javax.inject\jars\javax.inject-1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\javax.inject\javax.inject\docs\javax.inject-1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\aopalliance\aopalliance\srcs\aopalliance-1.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\aopalliance\aopalliance\jars\aopalliance-1.0.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.google.inject.extensions\guice-assistedinject\srcs\guice-assistedinject-4.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.google.inject.extensions\guice-assistedinject\jars\guice-assistedinject-4.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.google.inject.extensions\guice-assistedinject\docs\guice-assistedinject-4.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-java_2.11\srcs\play-java_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-java_2.11\jars\play-java_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-java_2.11\docs\play-java_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.yaml\snakeyaml\srcs\snakeyaml-1.16-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.yaml\snakeyaml\bundles\snakeyaml-1.16.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.yaml\snakeyaml\docs\snakeyaml-1.16-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.hibernate\hibernate-validator\srcs\hibernate-validator-5.2.4.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.hibernate\hibernate-validator\jars\hibernate-validator-5.2.4.Final.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\javax.validation\validation-api\srcs\validation-api-1.1.0.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\javax.validation\validation-api\jars\validation-api-1.1.0.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\javax.validation\validation-api\docs\validation-api-1.1.0.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.jboss.logging\jboss-logging\srcs\jboss-logging-3.2.1.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.jboss.logging\jboss-logging\jars\jboss-logging-3.2.1.Final.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.fasterxml\classmate\srcs\classmate-1.1.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.fasterxml\classmate\bundles\classmate-1.1.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.fasterxml\classmate\docs\classmate-1.1.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\javax.el\javax.el-api\srcs\javax.el-api-3.0.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\javax.el\javax.el-api\jars\javax.el-api-3.0.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\javax.el\javax.el-api\docs\javax.el-api-3.0.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.springframework\spring-context\srcs\spring-context-4.2.7.RELEASE-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.springframework\spring-context\jars\spring-context-4.2.7.RELEASE.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.springframework\spring-context\docs\spring-context-4.2.7.RELEASE-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.springframework\spring-core\srcs\spring-core-4.2.7.RELEASE-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.springframework\spring-core\jars\spring-core-4.2.7.RELEASE.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.springframework\spring-core\docs\spring-core-4.2.7.RELEASE-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.springframework\spring-beans\srcs\spring-beans-4.2.7.RELEASE-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.springframework\spring-beans\jars\spring-beans-4.2.7.RELEASE.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.springframework\spring-beans\docs\spring-beans-4.2.7.RELEASE-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.reflections\reflections\srcs\reflections-0.9.10-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.reflections\reflections\jars\reflections-0.9.10.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.reflections\reflections\docs\reflections-0.9.10-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.google.guava\guava\srcs\guava-19.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.google.guava\guava\bundles\guava-19.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.google.guava\guava\docs\guava-19.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.javassist\javassist\srcs\javassist-3.18.2-GA-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.javassist\javassist\bundles\javassist-3.18.2-GA.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.javassist\javassist\docs\javassist-3.18.2-GA-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.jodah\typetools\srcs\typetools-0.4.4-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.jodah\typetools\bundles\typetools-0.4.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.jodah\typetools\docs\typetools-0.4.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.google.code.findbugs\jsr305\srcs\jsr305-3.0.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.google.code.findbugs\jsr305\jars\jsr305-3.0.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.google.code.findbugs\jsr305\docs\jsr305-3.0.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.apache.tomcat\tomcat-servlet-api\srcs\tomcat-servlet-api-8.0.33-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.apache.tomcat\tomcat-servlet-api\jars\tomcat-servlet-api-8.0.33.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\srcs\play-netty-server_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\docs\play-netty-server_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.netty\netty-reactive-streams-http\srcs\netty-reactive-streams-http-1.0.8-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.netty\netty-reactive-streams-http\jars\netty-reactive-streams-http-1.0.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.netty\netty-reactive-streams-http\docs\netty-reactive-streams-http-1.0.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.netty\netty-reactive-streams\srcs\netty-reactive-streams-1.0.8-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.netty\netty-reactive-streams\jars\netty-reactive-streams-1.0.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.netty\netty-reactive-streams\docs\netty-reactive-streams-1.0.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\io.netty\netty-handler\srcs\netty-handler-4.0.41.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty-handler\jars\netty-handler-4.0.41.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\io.netty\netty-handler\docs\netty-handler-4.0.41.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\io.netty\netty-codec\srcs\netty-codec-4.0.41.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty-codec\jars\netty-codec-4.0.41.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\io.netty\netty-codec\docs\netty-codec-4.0.41.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\io.netty\netty-codec-http\srcs\netty-codec-http-4.0.41.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty-codec-http\jars\netty-codec-http-4.0.41.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\io.netty\netty-codec-http\docs\netty-codec-http-4.0.41.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty-transport-native-epoll\jars\netty-transport-native-epoll-4.0.51.Final-linux-x86_64.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\io.netty\netty-common\srcs\netty-common-4.0.51.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty-common\jars\netty-common-4.0.51.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\io.netty\netty-common\docs\netty-common-4.0.51.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\io.netty\netty-buffer\srcs\netty-buffer-4.0.51.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty-buffer\jars\netty-buffer-4.0.51.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\io.netty\netty-buffer\docs\netty-buffer-4.0.51.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\io.netty\netty-transport\srcs\netty-transport-4.0.51.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty-transport\jars\netty-transport-4.0.51.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\io.netty\netty-transport\docs\netty-transport-4.0.51.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-logback_2.11\srcs\play-logback_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-logback_2.11\docs\play-logback_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\ch.qos.logback\logback-classic\srcs\logback-classic-1.2.3-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.2.3.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\ch.qos.logback\logback-classic\docs\logback-classic-1.2.3-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\ch.qos.logback\logback-core\srcs\logback-core-1.2.3-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.2.3.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\ch.qos.logback\logback-core\docs\logback-core-1.2.3-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.slf4j\slf4j-api\srcs\slf4j-api-1.7.25-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.25.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.slf4j\slf4j-api\docs\slf4j-api-1.7.25-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-cache_2.11\srcs\play-cache_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-cache_2.11\docs\play-cache_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.sf.ehcache\ehcache-core\srcs\ehcache-core-2.6.11-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.sf.ehcache\ehcache-core\jars\ehcache-core-2.6.11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.sf.ehcache\ehcache-core\docs\ehcache-core-2.6.11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.apache.commons\commons-email\srcs\commons-email-1.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.apache.commons\commons-email\jars\commons-email-1.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.apache.commons\commons-email\docs\commons-email-1.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\javax.mail\mail\srcs\mail-1.4.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\javax.mail\mail\jars\mail-1.4.1.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\javax.activation\activation\srcs\activation-1.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\javax.activation\activation\jars\activation-1.1.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.eclipse.tycho\org.eclipse.jdt.core\srcs\org.eclipse.jdt.core-3.10.0.v20140604-1726-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.eclipse.tycho\org.eclipse.jdt.core\jars\org.eclipse.jdt.core-3.10.0.v20140604-1726.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.google.code.javaparser\javaparser\srcs\javaparser-1.0.11-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.google.code.javaparser\javaparser\jars\javaparser-1.0.11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.google.code.javaparser\javaparser\docs\javaparser-1.0.11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\javax.ws.rs\jsr311-api\srcs\jsr311-api-1.1.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\javax.ws.rs\jsr311-api\jars\jsr311-api-1.1.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\javax.ws.rs\jsr311-api\docs\jsr311-api-1.1.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.keyczar\keyczar\srcs\keyczar-0.66-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.keyczar\keyczar\jars\keyczar-0.66.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\log4j\log4j\srcs\log4j-1.2.14-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\log4j\log4j\jars\log4j-1.2.14.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-test_2.11\srcs\play-test_2.11-2.5.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.typesafe.play\play-test_2.11\jars\play-test_2.11-2.5.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.typesafe.play\play-test_2.11\docs\play-test_2.11-2.5.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\junit\junit\srcs\junit-4.12-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\junit\junit\jars\junit-4.12.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\junit\junit\docs\junit-4.12-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.hamcrest\hamcrest-core\srcs\hamcrest-core-1.3-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.hamcrest\hamcrest-core\jars\hamcrest-core-1.3.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.hamcrest\hamcrest-core\docs\hamcrest-core-1.3-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.novocode\junit-interface\srcs\junit-interface-0.11-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.novocode\junit-interface\jars\junit-interface-0.11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.novocode\junit-interface\docs\junit-interface-0.11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.scala-sbt\test-interface\srcs\test-interface-1.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.scala-sbt\test-interface\jars\test-interface-1.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.scala-sbt\test-interface\docs\test-interface-1.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.sourceforge.htmlunit\htmlunit\srcs\htmlunit-2.20-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.sourceforge.htmlunit\htmlunit\jars\htmlunit-2.20.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.sourceforge.htmlunit\htmlunit\docs\htmlunit-2.20-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\xalan\xalan\srcs\xalan-2.7.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\xalan\xalan\jars\xalan-2.7.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\xalan\xalan\docs\xalan-2.7.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\xalan\serializer\srcs\serializer-2.7.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\xalan\serializer\jars\serializer-2.7.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\xalan\serializer\docs\serializer-2.7.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpclient\srcs\httpclient-4.5.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpclient\jars\httpclient-4.5.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpclient\docs\httpclient-4.5.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpcore\srcs\httpcore-4.4.4-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpcore\jars\httpcore-4.4.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpcore\docs\httpcore-4.4.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\commons-logging\commons-logging\srcs\commons-logging-1.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\commons-logging\commons-logging\docs\commons-logging-1.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpmime\srcs\httpmime-4.5.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpmime\jars\httpmime-4.5.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.apache.httpcomponents\httpmime\docs\httpmime-4.5.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.sourceforge.htmlunit\htmlunit-core-js\srcs\htmlunit-core-js-2.17-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.sourceforge.htmlunit\htmlunit-core-js\jars\htmlunit-core-js-2.17.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.sourceforge.htmlunit\htmlunit-core-js\docs\htmlunit-core-js-2.17-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.sourceforge.nekohtml\nekohtml\srcs\nekohtml-1.9.22-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.sourceforge.nekohtml\nekohtml\jars\nekohtml-1.9.22.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.sourceforge.nekohtml\nekohtml\docs\nekohtml-1.9.22-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.sourceforge.cssparser\cssparser\srcs\cssparser-0.9.18-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.sourceforge.cssparser\cssparser\jars\cssparser-0.9.18.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.sourceforge.cssparser\cssparser\docs\cssparser-0.9.18-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.w3c.css\sac\srcs\sac-1.3-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.w3c.css\sac\jars\sac-1.3.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\commons-io\commons-io\srcs\commons-io-2.4-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\commons-io\commons-io\jars\commons-io-2.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\commons-io\commons-io\docs\commons-io-2.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-client\srcs\websocket-client-9.2.15.v20160210-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-client\jars\websocket-client-9.2.15.v20160210.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-client\docs\websocket-client-9.2.15.v20160210-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.eclipse.jetty\jetty-util\srcs\jetty-util-9.2.15.v20160210-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.eclipse.jetty\jetty-util\jars\jetty-util-9.2.15.v20160210.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.eclipse.jetty\jetty-util\docs\jetty-util-9.2.15.v20160210-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.eclipse.jetty\jetty-io\srcs\jetty-io-9.2.15.v20160210-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.eclipse.jetty\jetty-io\jars\jetty-io-9.2.15.v20160210.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.eclipse.jetty\jetty-io\docs\jetty-io-9.2.15.v20160210-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-common\srcs\websocket-common-9.2.15.v20160210-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-common\jars\websocket-common-9.2.15.v20160210.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-common\docs\websocket-common-9.2.15.v20160210-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-api\srcs\websocket-api-9.2.15.v20160210-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-api\jars\websocket-api-9.2.15.v20160210.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.eclipse.jetty.websocket\websocket-api\docs\websocket-api-9.2.15.v20160210-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.fluentlenium\fluentlenium-core\srcs\fluentlenium-core-0.10.9-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.fluentlenium\fluentlenium-core\jars\fluentlenium-core-0.10.9.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.fluentlenium\fluentlenium-core\docs\fluentlenium-core-0.10.9-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-java\jars\selenium-java-2.48.2.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-chrome-driver\srcs\selenium-chrome-driver-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-chrome-driver\jars\selenium-chrome-driver-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-chrome-driver\docs\selenium-chrome-driver-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-remote-driver\srcs\selenium-remote-driver-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-remote-driver\jars\selenium-remote-driver-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-remote-driver\docs\selenium-remote-driver-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\cglib\cglib-nodep\srcs\cglib-nodep-2.1_3-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\cglib\cglib-nodep\jars\cglib-nodep-2.1_3.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\com.google.code.gson\gson\srcs\gson-2.3.1-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\com.google.code.gson\gson\jars\gson-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\com.google.code.gson\gson\docs\gson-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-api\srcs\selenium-api-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-api\jars\selenium-api-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-api\docs\selenium-api-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.apache.commons\commons-exec\srcs\commons-exec-1.3-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.apache.commons\commons-exec\jars\commons-exec-1.3.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.apache.commons\commons-exec\docs\commons-exec-1.3-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.java.dev.jna\jna\srcs\jna-4.1.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.java.dev.jna\jna\jars\jna-4.1.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.java.dev.jna\jna\docs\jna-4.1.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\net.java.dev.jna\jna-platform\srcs\jna-platform-4.1.0-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\net.java.dev.jna\jna-platform\jars\jna-platform-4.1.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\net.java.dev.jna\jna-platform\docs\jna-platform-4.1.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-edge-driver\srcs\selenium-edge-driver-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-edge-driver\jars\selenium-edge-driver-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-edge-driver\docs\selenium-edge-driver-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-htmlunit-driver\srcs\selenium-htmlunit-driver-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-htmlunit-driver\jars\selenium-htmlunit-driver-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-htmlunit-driver\docs\selenium-htmlunit-driver-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-support\srcs\selenium-support-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-support\jars\selenium-support-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-support\docs\selenium-support-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-firefox-driver\srcs\selenium-firefox-driver-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-firefox-driver\jars\selenium-firefox-driver-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-firefox-driver\docs\selenium-firefox-driver-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-ie-driver\srcs\selenium-ie-driver-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-ie-driver\jars\selenium-ie-driver-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-ie-driver\docs\selenium-ie-driver-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-safari-driver\srcs\selenium-safari-driver-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-safari-driver\jars\selenium-safari-driver-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-safari-driver\docs\selenium-safari-driver-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.webbitserver\webbit\srcs\webbit-0.4.14-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.webbitserver\webbit\jars\webbit-0.4.14.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.webbitserver\webbit\docs\webbit-0.4.14-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\io.netty\netty\srcs\netty-3.5.2.Final-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\io.netty\netty\bundles\netty-3.5.2.Final.jar"/>
+  <classpathentry sourcepath="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-leg-rc\srcs\selenium-leg-rc-2.48.2-sources.jar" kind="lib" path="C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-leg-rc\jars\selenium-leg-rc-2.48.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\madam\.ivy2\cache\org.seleniumhq.selenium\selenium-leg-rc\docs\selenium-leg-rc-2.48.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="output" path="bin"/>
 </classpath>

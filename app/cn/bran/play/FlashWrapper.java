@@ -1,5 +1,7 @@
 package cn.bran.play;
 
+import play.mvc.Http.Context.Implicit;
+import play.mvc.Http.Flash;
 import cn.bran.japid.util.FlashScope;
 
 /**

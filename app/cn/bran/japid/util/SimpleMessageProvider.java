@@ -32,9 +32,7 @@ public class SimpleMessageProvider implements MessageProvider {
 		if (template != null) {
 			return String.format(template, args);
 		}
-		else {
-			return "?";
-		}
+		return "?";
 	}
 
 }

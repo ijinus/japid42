@@ -1,0 +1,120 @@
+import sbt._
+import Keys._
+import play.Play.autoImport._
+import PlayKeys._
+
+name := "ijitrack-server"
+version := "2.0-SNAPSHOT"
+
+scalaVersion := "2.11.8"
+
+// ,incOptions := incOptions.value.withNameHashing(true)
+unmanagedResourceDirectories in Compile  <+= baseDirectory( _ / "japidroot" ) // Not for dev
+// To add resources directories: japidroot, conf (https://github.com/playframework/playframework/issues/4512)
+PlayKeys.externalizeResources := false
+
+// To add the plugin RequireJS Optimizer (rjs) to the asset pipeline you can declare it as follows:
+// It is recommend that sbt-web’s sbt-digest and sbt-gzip plugins are included in the pipeline
+RjsKeys.generateSourceMaps := false
+//RjsKeys.mainModule := "main" // https://github.com/sbt/sbt-rjs
+pipelineStages := Seq(rjs, digest , gzip)
+
+// Create a map of versioned assets, replacing the empty versioned.js
+DigestKeys.indexPath := Some("javascripts/versioned.js")
+
+// Assign the asset index to a global versioned var
+DigestKeys.indexWriter ~= { writer => index => s"var versioned = ${writer(index)};" }
+
+// less config
+includeFilter in (Assets, LessKeys.less) := "*.less"
+
+// less config
+excludeFilter in (Assets, LessKeys.less) := "_*.less"
+
+// less config, for minified *.min.css files
+LessKeys.compress := true
+
+libraryDependencies ++= Seq(
+	evolutions,
+	javaJdbc,
+	javaWs,
+    "be.objectify" %% "deadbolt-java" % "2.4.4", // "2.2-RC4" exclude("com.typesafe.play", "play-cache_2.10"),
+    "org.apache.commons" % "commons-email" % "1.3",
+		"org.apache.httpcomponents" % "httpclient" % "4.3.4",
+    "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
+    "com.vitriko" % "japid42_2.11" % "0.12",
+    "com.yammer.metrics" % "metrics-core" % "2.1.2", // Not for production ?
+    // webjars
+    "org.webjars" % "font-awesome" % "4.5.0",
+    "org.webjars" % "requirejs" % "2.1.22",
+    "org.webjars" % "momentjs" % "2.10.6",
+    "org.webjars" % "store.js" % "1.3.17-1",
+    "org.webjars.npm" % "holderjs" % "2.8.1",
+    "org.webjars" % "jquery" % "1.10.2",
+    "org.webjars" % "jquery-ui" % "1.10.3",
+		"org.webjars.bower" % "jquery.scrollTo" % "2.1.2",
+    "org.webjars" % "bootstrap" % "2.3.2",
+    "org.webjars" % "bootstrap-select" % "1.7.3-1", // minor downgrade after play 2.4 migration, webjar next available version : "1.6.2",
+    // "org.webjars" % "bootstrap-datetimepicker" % "6aa746736d",
+	// "org.webjars" % "bootstrap-datepicker" % "1.0.1",
+    // "org.webjars" % "bootstrap-modal" % "2.1.0", // eviction org.webjars:bootstrap:2.3.2 -> 3.1.1
+    // "org.webjars" % "bootstrap-multiselect" % "0.9.5",
+    // "org.webjars" % "bootstrap-switch" % "3.0.2", // eviction org.webjars:bootstrap:2.3.2 -> 3.1.0, probably eviction with jquery
+    "org.webjars" % "datatables" % "1.9.4-2",
+    "org.webjars" % "datatables-colreorder" % "1.1.2",
+    "org.webjars" % "datatables-colvis" % "1.1.1",
+    "org.webjars" % "datatables-fixedcolumns" % "3.0.2",
+    "org.webjars" % "datatables-tools" % "2.2.4-1",
+    "org.webjars" % "jqplot" % "1.0.8r1250",
+    "org.webjars" % "leaflet" % "0.7.3", // upgrade from 0.7.1 to 0.7.3 ( after play 2.4 migration )
+    "org.webjars" % "Leaflet.label" % "0.2.1",
+    "org.webjars" % "leaflet-markercluster" % "0.4.0",
+    "org.webjars.bower" % "nouislider" % "7.0.10",
+    // "org.webjars" % "selectize.js" % "0.12.1", // eviction org.webjars:bootstrap:2.3.2 -> 3.2.0-2,
+    // "org.webjars" % "x-editable-bootstrap" % "1.5.1-1", // utiliser par template internaltionalInput.html mais jamais appelé
+    "org.webjars" % "angularjs" % "1.4.6",
+    "org.webjars.bower" % "angular-loading-bar" % "0.8.0",
+    "org.webjars.bower" % "angular-ui-router" % "0.2.15",
+    "org.webjars" % "angular-ui-bootstrap" % "0.8.0", // 0.8.0 is the last version of this library that supports Bootstrap CSS in version 2.3.x.
+    "org.webjars.bower" % "angular-ui-select" % "0.18.0",
+	"org.webjars.bower" % "angular-ui-switch" % "0.1.1",
+	// "org.webjars.bower" % "angular-cookies" % "1.5.9",
+    "org.threeten" % "threeten-extra" % "1.0",
+    "org.julienrf" %% "play-jsmessages" % "2.0.0", // js messages
+    "org.webjars.bower" % "pivottable" % "2.13.0", // pivottable
+    "org.webjars.bower" % "angular-nvd3" % "1.0.9", // angular-nvd3
+    "org.webjars.bower" % "spectrum" % "1.8.0", //spectrum color picker
+	"org.webjars.npm" % "github-com-object505-tipso" % "1.0.8",
+	"org.eclipse.jdt" % "org.eclipse.jdt.core" % "3.10.0",
+	"org.webjars.npm" % "es6-shim" % "0.35.3", //Fix of ie11-ng incompatibilities
+    //test dependencies
+    "org.mockito" % "mockito-core" % "2.10.0" % "test"
+)
+
+// resolvers += "Repository name" at "http://url.to/repository"
+resolvers += Resolver.url("Objectify Play Repository", url("http://schaloner.github.com/releases/"))(Resolver.ivyStylePatterns)
+
+resolvers += Resolver.url("Objectify Play Snapshot Repository", url("http://schaloner.github.com/snapshots/"))(Resolver.ivyStylePatterns)
+
+resolvers += "nexus repositories" at "http://10.29.0.4:8081/nexus/content/groups/public/"
+//resolvers += Resolver.url("Ijinus Japid Play Repository", url("http://lln-ijinus.github.com/releases/"))(Resolver.ivyStylePatterns);
+
+//requireJs += "crud.js"
+//requireJsShim += "crud.js"
+
+
+// Play provides two styles of routers, one expects its actions to be injected, the
+// other, legacy style, accesses its actions statically.
+routesGenerator := InjectedRoutesGenerator
+
+EclipseKeys.projectFlavor := EclipseProjectFlavor.Java           // Java project. Don't expect Scala IDE
+EclipseKeys.createSrc := EclipseCreateSrc.ValueSet(EclipseCreateSrc.ManagedClasses, EclipseCreateSrc.ManagedResources)  // Use .class files instead of generated .scala files for views and routes 
+EclipseKeys.preTasks := Seq(compile in Compile)                  // Compile the project before generating Eclipse files, so that .class files for views and routes are present
+
+//fork in test := false //false permits to enable breakpoint, but mockito spy are failing
+
+//playJavaSettings
+lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean, SbtWeb)
+
+
+fork in run := true

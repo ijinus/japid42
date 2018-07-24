@@ -14,6 +14,8 @@
 
 package cn.bran.japid.classmeta;
 
+import japa.parser.ast.body.Parameter;
+
 import java.util.List;
 
 import cn.bran.japid.compiler.JavaSyntaxTool;
@@ -35,11 +37,11 @@ public class InnerClassMeta {
 	String renderParams;
 	String renderBody;
 //	private String interfaceName;
-	public InnerClassMeta(String tagName, int counter, String callbackArgs, String renderBody) {
-		this.tagName = tagName.replace('/', '.');
-		this.counter = counter;
+	public InnerClassMeta(String _tagName, int _counter, String callbackArgs, String _renderBody) {
+		this.tagName = _tagName.replace('/', '.');
+		this.counter = _counter;
 		this.renderParams = JavaSyntaxTool.boxPrimitiveTypesInParams(callbackArgs);
-		this.renderBody = renderBody;
+		this.renderBody = _renderBody;
 	}
 //
 //	/**

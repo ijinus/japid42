@@ -26,24 +26,24 @@ public class JapidTemplate {
 
 	/**
 	 * 
-	 * @param name
+	 * @param _name
 	 *            the Japid script file name.  The name should start from the package root and the
 	 *            path to the file will be used as the package name and the file
 	 *            name as the class name. e.g.: a/b/c.html, a/b/c.xml. 
-	 * @param source
+	 * @param _source
 	 *            the source of the template
 	 */
-    public JapidTemplate(String name, String source) {
-        this.name = name;
-        this.source = source;
+    public JapidTemplate(String _name, String _source) {
+        this.name = _name;
+        this.source = _source;
         parseFullyQualifiedName();
     }
 
-    public JapidTemplate(String fqName, MimeTypeEnum mimeType, String source) {
+    public JapidTemplate(String fqName, MimeTypeEnum mimeType, String _source) {
     	if (!fqName.startsWith("japidviews."))
     		throw new RuntimeException("Japid script was not registered with a fully qualified class name starting with \"japidviews.\":  " + fqName);
     	this.name = fqName;
-    	this.source = source;
+    	this.source = _source;
     	int lastDot = fqName.lastIndexOf('.');
     	if (lastDot >= 0) {
 			this.packageName = fqName.substring(0, lastDot);
@@ -85,9 +85,9 @@ public class JapidTemplate {
 		
 	}
 
-	public JapidTemplate(String source) {
+	public JapidTemplate(String _source) {
         this.name = UUID.randomUUID().toString();
-        this.source = source;
+        this.source = _source;
     }
     public String javaSource;
     public Class<JapidTemplateBaseWithoutPlay> compiledTemplate;

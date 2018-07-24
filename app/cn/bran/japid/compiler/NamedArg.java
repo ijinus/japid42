@@ -1,5 +1,7 @@
 package cn.bran.japid.compiler;
 
+import japa.parser.ast.expr.Expression;
+
 /**
  * a = "asd", b = 12, etc
  * 
